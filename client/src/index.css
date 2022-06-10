@@ -1,0 +1,26 @@
+:root {
+  --light-gray: #f4f4f4;
+  --green: #85bf3e;
+  --white: #ffffff;
+}
+
+body {
+  background-color: var(--light-gray);
+  padding-bottom: 5rem;
+}
+
+.bg-dark, .btn-primary, .btn:hover {
+  background-color: var(--green) !important;
+  color: var(--white);
+}
+
+.btn-primary {
+  background-color: var(--green) !important;
+  color: var(--white);
+  border: 0;
+}
+
+.logo {
+  height: 35px;
+  margin: 0 20px 0 25px;
+}
