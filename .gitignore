@@ -1,6 +1,9 @@
 # Env
 .env
 
+# Local DB
+localdb.json
+
 # Logs
 logs
 *.log
