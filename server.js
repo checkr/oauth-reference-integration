@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(candidatesRouter)
 
 if (process.env.NODE_ENV === 'production') {
-  const reactBuild = './client/dist'
+  const reactBuild = './client/build'
   app.use(express.static(reactBuild))
   app.get('*', (_, res) => {
     res.sendFile('index.html', {root: reactBuild})
