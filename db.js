@@ -25,13 +25,7 @@ const prodDB = async () => {
 }
 
 const database = async () => {
-  if (process.env.NODE_ENV == 'production') {
-    const db = await prodDB()
-    return db
-  } else {
-    const db = await devDB()
-    return db
-  }
+  return process.env.NODE_ENV == 'production' ? await prodDB() : await devDB()
 }
 
 export default database
