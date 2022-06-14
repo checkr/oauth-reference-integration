@@ -3,23 +3,18 @@
   "scripts": {
     "dev": "concurrently --kill-others-on-fail 'node server' 'cd client/ && yarn start'",
     "dev:client": "cd client/ && yarn dev",
-    "dev:server": "node server.js",
-    "db:init": "prisma db push && prisma db seed",
-    "psql": "psql $DATABASE_URL"
-  },
-  "prisma": {
-    "seed": "sh prisma/seed.sh"
+    "dev:server": "node server.js"
   },
   "dependencies": {
-    "@prisma/client": "^3.15.0",
+    "@sadorlovsky/lowdb-s3": "1",
+    "aws-sdk": "^2.1153.0",
     "concurrently": "^7.2.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "lowdb": "^3.0.0",
     "pg": "^8.7.3",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {
-    "prisma": "^3.15.1"
-  }
+  "devDependencies": {}
 }
