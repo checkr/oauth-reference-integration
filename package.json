@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "concurrently --kill-others-on-fail 'node server' 'cd client/ && yarn start'",
     "dev:client": "cd client/ && yarn dev",
-    "dev:server": "node server.js"
+    "dev:server": "node server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "@sadorlovsky/lowdb-s3": "1",
