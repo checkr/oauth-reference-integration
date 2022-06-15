@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "setup": "yarn install && cd client/ && yarn install",
     "dev": "concurrently --kill-others-on-fail 'node server' 'cd client/ && yarn start'",
     "dev:client": "cd client/ && yarn dev",
     "dev:server": "node server.js",
