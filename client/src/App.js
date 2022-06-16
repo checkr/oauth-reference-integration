@@ -1,4 +1,7 @@
-function Home() {
+import {useState, useEffect} from 'react'
+import Candidates from './Candidates'
+
+function ConnectToCheckr() {
   return (
     <div className="container-fluid">
       <div className="my-5">
@@ -18,11 +21,27 @@ function Home() {
   )
 }
 
+const fetchFirstAccount = async () => {
+  return fetch('/api/accounts').then(async response => {
+    const accounts = await response.json()
+    if (accounts.length > 0) {
+      return accounts[0]
+    } else {
+      return null
+    }
+  }, console.error)
+}
+
 function App() {
+  const [account, setAccount] = useState(null)
+  useEffect(() => {
+    fetchFirstAccount().then(a => {
+      setAccount(a)
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <div className="App">{account ? <Candidates /> : <ConnectToCheckr />}</div>
   )
 }
 
