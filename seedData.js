@@ -1,4 +1,10 @@
 const seedData = {
+  accounts: [
+    {
+      id: 'ce04e0a2-ecec-11ec-b7ed-f33adcba9538',
+      name: 'Our Favorite Customer',
+    },
+  ],
   candidates: [
     {
       id: 'efb0d238-a455-41c6-b923-e0cc4f5761e7',

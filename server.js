@@ -1,12 +1,14 @@
 import 'dotenv/config'
 import express from 'express'
 import candidatesRouter from './routes/candidates.js'
+import accountsRouter from './routes/accounts.js'
 
 const port = process.env.PORT || 8000
 
 const app = express()
 app.use(express.json())
 app.use(candidatesRouter)
+app.use(accountsRouter)
 
 if (process.env.NODE_ENV === 'production') {
   const reactBuild = './client/build'
