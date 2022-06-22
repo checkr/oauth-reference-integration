@@ -9,7 +9,9 @@ body {
   padding-bottom: 5rem;
 }
 
-.bg-dark, .btn-primary, .btn:hover {
+.bg-dark,
+.btn-primary,
+.btn:hover {
   background-color: var(--green) !important;
   color: var(--white);
 }
@@ -20,7 +22,29 @@ body {
   border: 0;
 }
 
+.btn-secondary {
+  border: 0;
+}
+
 .logo {
   height: 35px;
   margin: 0 20px 0 25px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.relative {
+  position: relative;
+}
+
+.center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
 }

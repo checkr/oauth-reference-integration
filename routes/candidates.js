@@ -18,6 +18,7 @@ candidatesRouter.get('/api/candidates/:id', async (req, res) => {
   }
   res.status(200).json(candidate)
 })
+
 candidatesRouter.post('/api/candidates', async (req, res) => {
   const now = new Date()
   const candidate = {
@@ -34,6 +35,7 @@ candidatesRouter.post('/api/candidates', async (req, res) => {
   await db.write()
   res.status(200).json(candidate)
 })
+
 candidatesRouter.put('/api/candidates/:id', async (req, res) => {
   const index = db.data.candidates.findIndex(c => c.id == req.params.id)
   if (index == -1) {
