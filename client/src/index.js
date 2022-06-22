@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import NavBar from './NavBar'
 import EmbedsHome from './EmbedsHome'
-import Candidates from './Candidates'
+import CandidatesPage from './components/candidates/CandidatesPage'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/embeds" element={<EmbedsHome />} />
-        <Route path="/candidates" element={<Candidates />} />
+        <Route path="/candidates" element={<CandidatesPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
