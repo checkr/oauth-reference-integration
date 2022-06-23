@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import Candidates from './Candidates'
+import Candidates from './components/candidates/CandidatesPage.js'
 
 function ConnectToCheckr() {
   return (
