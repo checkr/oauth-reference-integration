@@ -21,7 +21,6 @@ export default function CandidateModal({
       show={isOpen}
       onHide={() => handleClose()}
       size="lg"
-      backdrop="static"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
