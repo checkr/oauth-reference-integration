@@ -13,6 +13,7 @@
     "dev": "concurrently --kill-others-on-fail \"node server\" \"cd client/ && yarn start\"",
     "dev:client": "cd client/ && yarn dev",
     "dev:server": "node server.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
@@ -23,8 +24,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-basic-auth": "^1.2.1",
     "lowdb": "^3.0.0",
+    "msw": "^0.42.3",
+    "node-fetch": "^3.2.6",
     "pg": "^8.7.3",
+    "supertest": "^6.2.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {}

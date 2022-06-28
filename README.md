@@ -6,7 +6,16 @@
 yarn setup
 ```
 
-2. Run it locally:
+2. Setup Environment Variables
+
+> Create an `.env` file and copy the variables from `.env.example`
+
+```
+OAUTH_ACCESS_TOKEN='0ca8195ca88db88a6df89a9cdd56a7f148f8714b'
+CHECKR_API_URL='https://api.checkr-staging.com/v1'
+```
+
+3. Run it locally:
 
 ```
 yarn dev

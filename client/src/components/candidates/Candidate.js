@@ -1,5 +1,36 @@
 import React from 'react'
-import {Accordion, Button, Tabs, Tab} from 'react-bootstrap'
+import ReactDOM from 'react-dom'
+import {Embeds} from '@checkr/web-sdk'
+import {Buffer} from 'buffer'
+import {Accordion, Button, Card, Tabs, Tab} from 'react-bootstrap'
+
+const styles = {
+  '.btn-primary': {
+    background: '#527a00',
+  },
+  '.btn-loading::after': {
+    border: '2px solid #527a00',
+  },
+  '.loading-bar': {
+    'background-color': '#527a00',
+  },
+  '.header': {
+    'font-size': '150%',
+    'font-weight': 'normal',
+    color: '#527a00',
+  },
+  '.form-label': {
+    'font-weight': 'bold',
+  },
+  '.form-control': {
+    padding: '0.5rem',
+  },
+  '.link': {
+    'text-decoration': 'none',
+  },
+}
+
+const ReportsOverview = Embeds.ReportsOverview.useReact(React, ReactDOM)
 
 export default function Candidate({
   id,
@@ -11,6 +42,17 @@ export default function Candidate({
   createdAt,
   handleEdit,
 }) {
+  const defaultProps = {
+    externalCandidateId: id,
+    sessionTokenPath: '/api/session-tokens',
+    sessionTokenRequestHeaders: () => ({
+      Authorization: `Basic ${Buffer.from('some-user:supersecret').toString(
+        'base64',
+      )}`,
+    }),
+    styles,
+  }
+
   return (
     <Accordion.Item eventKey={id} data-testid="candidate-item">
       <Accordion.Header>
@@ -44,16 +86,31 @@ export default function Candidate({
               </Button>
             </div>
           </Tab>
-          <Tab eventKey="background-checks" title="Background Checks">
+          <Tab eventKey="activity" title="Activity">
             <div
               className="tab-pane p-3"
-              id={`candidate-tab-content-${id}-background-checks`}
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-              animi maxime exercitationem perferendis quae? Laudantium dolorem
-              debitis earum quidem assumenda, quibusdam perspiciatis mollitia
-              facere aut impedit rem quas animi cum.
-            </div>
+              id={`candidate-tab-content-${id}-activity`}
+            ></div>
+            <Card>
+              <Card.Header>Background Checks</Card.Header>
+              <Card.Body>
+                <Button
+                  onClick={() => {
+                    const embed = new Embeds.NewInvitation({
+                      ...defaultProps,
+                      ...{defaultEmail: email},
+                    })
+                    embed.modal()
+                  }}
+                  data-testid={`new-invitation-${id}`}
+                >
+                  New Background Check
+                </Button>
+                <Card.Text className="mt-3" as={'div'}>
+                  <ReportsOverview {...defaultProps} />
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Tab>
         </Tabs>
       </Accordion.Body>

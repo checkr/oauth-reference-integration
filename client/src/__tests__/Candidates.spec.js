@@ -1,10 +1,10 @@
 import React from 'react'
 import {rest} from 'msw'
 import {render, screen, waitFor} from '@testing-library/react'
-import {CandidatesPageObject} from '../../test/page_objects/Candidates'
-import CandidatesPage from '../components/candidates/CandidatesPage'
+import {CandidatesPageObject} from '../../test/page_objects/Candidates.js'
+import CandidatesPage from '../components/candidates/CandidatesPage.js'
 import {candidates as candidates_fixture} from '../../test/fixtures/candidates.json'
-import {httpSetup} from '../../test/helpers/httpSetup'
+import {httpSetup} from '../../test/helpers/httpSetup.js'
 
 describe('Candidates page', () => {
   let editCandidateRequestPayload = {}
