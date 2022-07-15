@@ -1,0 +1,72 @@
+:root {
+  --light-gray: #f4f4f4;
+  --green: #85bf3e;
+  --white: #fff;
+}
+
+body {
+  padding-bottom: 5rem;
+  background-color: var(--light-gray);
+}
+
+.dropdown-toggle,
+.navbar-brand,
+.navbar-text {
+  color: #fff !important;
+}
+
+.bg-dark,
+.btn-primary,
+.btn:hover {
+  color: var(--white);
+  background-color: var(--green) !important;
+}
+
+.btn-primary {
+  color: var(--white);
+  background-color: var(--green) !important;
+  border: 0;
+}
+
+.btn-secondary {
+  border: 0;
+}
+
+.logo {
+  height: 35px;
+  margin: 0 20px 0 25px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.relative {
+  position: relative;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toast {
+  animation: slide-in 0.25s ease-out;
+}
+
+.toast-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}

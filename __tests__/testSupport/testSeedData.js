@@ -1,8 +1,8 @@
-const seedData = {
+const testSeedData = {
   accounts: [
     {
       id: 'ce04e0a2-ecec-11ec-b7ed-f33adcba9538',
-      name: 'Our Favorite Customer',
+      name: 'Default Account',
       createdAt: '2022-06-23T23:51:24.077Z',
       updatedAt: '2022-06-23T23:51:24.077Z',
     },
@@ -13,7 +13,7 @@ const seedData = {
       email: 'margesimpson@somebody.com',
       name: 'Marge Simpson',
       notes: 'foobar',
-      phone: '1111111111',
+      phone: '111111111134adawd',
       step: 'Interviewing',
       createdAt: '2022-06-02 18:16:33.512 +00:00',
       updatedAt: '2022-06-02 18:16:33.512 +00:00',
@@ -23,7 +23,7 @@ const seedData = {
       email: 'homersimpson@somebody.com',
       name: 'Homer Simpson',
       notes: 'foobar',
-      phone: '2222222222',
+      phone: '12312321312',
       step: 'Pass',
       createdAt: '2022-06-02 18:17:05.127 +00:00',
       updatedAt: '2022-06-02 18:17:05.127 +00:00',
@@ -31,4 +31,4 @@ const seedData = {
   ],
 }
 
-export default seedData
+export default testSeedData

@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Embeds} from '@checkr/web-sdk'
-import {Buffer} from 'buffer'
 import {Accordion, Button, Card, Tabs, Tab} from 'react-bootstrap'
 
 const styles = {
@@ -46,8 +45,8 @@ export default function Candidate({
     externalCandidateId: id,
     sessionTokenPath: '/api/session-tokens',
     sessionTokenRequestHeaders: () => ({
-      Authorization: `Basic ${Buffer.from('some-user:supersecret').toString(
-        'base64',
+      Authorization: `Bearer ${localStorage.getItem(
+        'reference-integration-session-token',
       )}`,
     }),
     styles,

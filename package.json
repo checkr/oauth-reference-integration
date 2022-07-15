@@ -7,30 +7,51 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
+  "name": "embeds-reference-integration",
   "type": "module",
   "scripts": {
     "setup": "yarn install && cd client/ && yarn install",
-    "dev": "concurrently --kill-others-on-fail \"node server\" \"cd client/ && yarn start\"",
-    "dev:client": "cd client/ && yarn dev",
-    "dev:server": "node server.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "dev:backend:localtunnel": "lt --port 8000",
+    "dev:backend": "nodemon server.js",
+    "dev:frontend": "cd client/ && yarn dev:frontend",
+    "test:backend": "jest",
+    "test:frontend": "cd client/ && yarn test",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "lint:js": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "lint:style": "stylelint \"**/*.{css,scss}\""
   },
   "dependencies": {
     "@sadorlovsky/lowdb-s3": "1",
     "aws-sdk": "^2.1153.0",
-    "concurrently": "^7.2.1",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
+    "eslint": "^8.19.0",
     "express": "^4.18.1",
-    "express-basic-auth": "^1.2.1",
+    "express-bearer-token": "^2.4.0",
+    "jsonwebtoken": "^8.5.1",
     "lowdb": "^3.0.0",
+    "morgan": "^1.10.0",
     "msw": "^0.42.3",
     "node-fetch": "^3.2.6",
-    "pg": "^8.7.3",
     "supertest": "^6.2.3",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^28.1.1",
+    "localtunnel": "^2.0.2",
+    "mocha": "^10.0.0",
+    "msw": "^0.42.3",
+    "nodemon": "^2.0.18",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-recommended": "^8.0.0",
+    "stylelint-config-standard": "^26.0.0",
+    "supertest": "^6.2.3"
+  }
 }
