@@ -1,34 +1,45 @@
 import React from 'react'
+import mockBackend from './testSupport/helpers/mockBackend.js'
 import {rest} from 'msw'
 import {render, screen, waitFor} from '@testing-library/react'
-import {CandidatesPageObject} from '../../test/page_objects/Candidates.js'
+import {CandidatesPageObject} from './testSupport/page_objects/Candidates.js'
 import CandidatesPage from '../components/candidates/CandidatesPage.js'
-import {candidates as candidates_fixture} from '../../test/fixtures/candidates.json'
-import {httpSetup} from '../../test/helpers/httpSetup.js'
+import {QueryClient, QueryClientProvider} from 'react-query'
+import {candidates as candidates_fixture} from './testSupport/fixtures/candidates.json'
+
+const queryClient = new QueryClient()
+
+const Page = () => (
+  <QueryClientProvider client={queryClient}>
+    <CandidatesPage />
+  </QueryClientProvider>
+)
 
 describe('Candidates page', () => {
   let editCandidateRequestPayload = {}
   let createCandidateRequestPayload = {}
   const page = new CandidatesPageObject(screen)
-  const serverMock = new httpSetup()
+  const backend = new mockBackend()
 
-  beforeAll(() => serverMock.listen())
-  afterAll(() => serverMock.close())
+  beforeAll(() => backend.server.listen())
+  afterAll(() => backend.server.close())
 
   it('displays an error when no candidates are found', async () => {
-    serverMock.httpMockGet('candidates', [])
-    render(<CandidatesPage />)
+    backend.stubHttpGet('/api/candidates', [])
+    render(<Page />)
 
     await page.initialLoad()
     await page.pageErrors('No candidates found')
   })
 
   it('displays a list of candidates when available', async () => {
-    serverMock.httpMockGet('candidates', candidates_fixture)
-    render(<CandidatesPage />)
+    backend.stubHttpGet('/api/candidates', candidates_fixture)
+    render(<Page />)
 
     await page.initialLoad()
-    page.validateElementLength('candidate-item', candidates_fixture.length)
+    await waitFor(() => {
+      page.validateElementLength('candidate-item', candidates_fixture.length)
+    })
   })
 
   it('updates an existing candidate', async () => {
@@ -41,14 +52,14 @@ describe('Candidates page', () => {
       step: 'Rejected',
     }
 
-    serverMock.server.use(
+    backend.server.use(
       rest.put(`/api/candidates/${testCandidate.id}`, async (req, res, ctx) => {
         editCandidateRequestPayload = req.body
-        return res(ctx.json({id: 'f'}))
+        return res(ctx.json({}))
       }),
     )
 
-    render(<CandidatesPage />)
+    render(<Page />)
 
     await page.initialLoad()
 
@@ -77,14 +88,14 @@ describe('Candidates page', () => {
       step: 'Rejected',
     }
 
-    serverMock.server.use(
+    backend.server.use(
       rest.post('/api/candidates/', async (req, res, ctx) => {
         createCandidateRequestPayload = req.body
-        return res(ctx.json({id: 'f'}))
+        return res(ctx.json({}))
       }),
     )
 
-    render(<CandidatesPage />)
+    render(<Page />)
 
     await page.initialLoad()
 

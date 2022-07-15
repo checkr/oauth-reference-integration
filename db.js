@@ -1,11 +1,25 @@
 import {Low, JSONFile} from 'lowdb'
-import S3Adapter from '@sadorlovsky/lowdb-s3'
+import testSeedData from './__tests__/testSupport/testSeedData.js'
 import seedData from './seedData.js'
+import S3Adapter from '@sadorlovsky/lowdb-s3'
+
+const testDB = async () => {
+  const db = new Low(new JSONFile('./__tests__/testSupport/testdb.json'))
+  await db.read()
+  if (!db.data) {
+    db.data = testSeedData
+    await db.write()
+  }
+  return db
+}
 
 const devDB = async () => {
   const db = new Low(new JSONFile('localdb.json'))
   await db.read()
-  db.data ||= seedData
+  if (!db.data) {
+    db.data = seedData
+    await db.write()
+  }
   return db
 }
 
@@ -25,7 +39,9 @@ const prodDB = async () => {
 }
 
 const database = async () => {
-  return process.env.NODE_ENV == 'production' ? await prodDB() : await devDB()
+  if (process.env.NODE_ENV === 'production') return await prodDB()
+  if (process.env.NODE_ENV === 'test') return await testDB()
+  return await devDB()
 }
 
 export default database

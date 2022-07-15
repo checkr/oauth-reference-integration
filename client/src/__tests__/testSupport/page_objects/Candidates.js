@@ -68,6 +68,7 @@ class CandidatesPageObject {
   // Button Interactions *********************************************
 
   clickCandidate(name) {
+    // eslint-disable-next-line testing-library/no-node-access
     userEvent.click(this.screen.getByText(name).closest('button'))
   }
 
