@@ -1,0 +1,17 @@
+default:
+  image: cypress/browsers:node16.13.2-chrome100-ff98
+
+stages:
+  - tests
+
+backend_tests:
+  stage: tests
+  before_script:
+    - yarn setup
+  script: yarn test:backend
+
+frontend_tests:
+  stage: tests
+  before_script:
+    - yarn setup
+  script: CI=true yarn test:frontend

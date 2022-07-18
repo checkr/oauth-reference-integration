@@ -1,10 +1,10 @@
-import {Low, JSONFile} from 'lowdb'
+import {Low, JSONFile, Memory} from 'lowdb'
 import testSeedData from './__tests__/testSupport/testSeedData.js'
 import seedData from './seedData.js'
 import S3Adapter from '@sadorlovsky/lowdb-s3'
 
 const testDB = async () => {
-  const db = new Low(new JSONFile('./__tests__/testSupport/testdb.json'))
+  const db = new Low(new Memory())
   await db.read()
   if (!db.data) {
     db.data = testSeedData

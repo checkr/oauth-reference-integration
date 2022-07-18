@@ -16,6 +16,7 @@
     "dev:frontend": "cd client/ && yarn dev:frontend",
     "test:backend": "jest",
     "test:frontend": "cd client/ && yarn test",
+    "test:frontend:ci": "cd client/ && yarn test:ci",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "lint:js": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx",
