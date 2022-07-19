@@ -1,7 +1,6 @@
 import 'dotenv/config'
 import morgan from 'morgan'
 import express from 'express'
-import localtunnel from 'localtunnel'
 import candidatesRouter from './routes/candidates.js'
 import accountsRouter from './routes/accounts.js'
 import sessionTokensRouter from './routes/session-tokens.js'
@@ -27,7 +26,3 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port)
-;(async () => {
-  const tunnel = await localtunnel({port: port})
-  console.log(`Tunnel: ${tunnel.url}`)
-})()

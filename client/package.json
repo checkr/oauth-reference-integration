@@ -10,7 +10,6 @@
   "name": "embeds-reference-integration",
   "type": "module",
   "scripts": {
-    "dev:frontend:localtunnel": "lt --port 3000",
     "dev:frontend": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
@@ -33,7 +32,6 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "localtunnel": "^2.0.2",
     "msw": "^0.42.2"
   },
   "eslintConfig": {
