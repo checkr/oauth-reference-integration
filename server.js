@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+app.listen(port)
 console.log(`Private API URL: http://localhost:${port}`)
 ;(async () => {
   const url = await ngrok.connect()
@@ -33,8 +34,5 @@ console.log(`Private API URL: http://localhost:${port}`)
     '\x1b[34m%s\x1b[0m',
     `OAuth webhook URL: ${url}/api/checkr/webhooks`,
   )
-  console.log(
-    '\x1b[34m%s\x1b[0m',
-    `OAuth redirect URL: ${url}/api/checkr/tbd`,
-  )
+  console.log('\x1b[34m%s\x1b[0m', `OAuth redirect URL: ${url}/api/checkr/tbd`)
 })()
