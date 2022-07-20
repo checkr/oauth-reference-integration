@@ -4,12 +4,16 @@ import checkrRouter from '../routes/checkr.js'
 import {faker} from '@faker-js/faker'
 import {
   createAccountWithCheckrAccountId,
-  createAccountWithCheckrAccessToken,
+  //createAccountWithCheckrAccessToken,
   findAccountWithCheckrId,
   findAccountWithId,
 } from './testSupport/helpers/accountHelper.js'
 import {getValidSignature} from './testSupport/helpers/webhooksHelper.js'
-import {encrypt, decrypt, clearDB} from './testSupport/helpers/dbHelper.js'
+import {
+  //  encrypt,
+  decrypt,
+  clearDB,
+} from './testSupport/helpers/dbHelper.js'
 import testSeedData from './testSupport/testSeedData.js'
 import mockBackend from '../client/src/__tests__/testSupport/helpers/mockBackend.js'
 
