@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import morgan from 'morgan'
 import express from 'express'
+import ngrok from 'ngrok'
 import candidatesRouter from './routes/candidates.js'
 import accountsRouter from './routes/accounts.js'
 import sessionTokensRouter from './routes/session-tokens.js'
@@ -25,4 +26,15 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-app.listen(port)
+console.log(`Private API URL: http://localhost:${port}`)
+;(async () => {
+  const url = await ngrok.connect()
+  console.log(
+    '\x1b[34m%s\x1b[0m',
+    `OAuth webhook URL: ${url}/api/checkr/webhooks`,
+  )
+  console.log(
+    '\x1b[34m%s\x1b[0m',
+    `OAuth redirect URL: ${url}/api/checkr/tbd`,
+  )
+})()
