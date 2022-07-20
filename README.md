@@ -22,15 +22,15 @@ CHECKR_OAUTH_CLIENT_SECRET=your_partner_application_client_secret
 This implementation uses the free version of [ngrok](https://ngrok.com/) to
 enable testing of your integration in your localhost environment.
 
-Start the frontend and backend servers by running this command:
+Run the following commands in separate terminals to start the backend and the frontend.
 
 ```shell
-yarn dev
+yarn dev:backend
 ```
 
-4. Use the values of _OAuth webhook URL_ and _OAuth redirect URL_ in the server output in your [Partner Application Settings](https://dashboard.checkrhq-staging.net/account/applications). 
-
-5. Navigate to [http://localhost:3000](http://localhost:3000) to view the integration.
+```shell
+yarn dev:frontend
+```
 
 # VS Code Recommended Settings
 

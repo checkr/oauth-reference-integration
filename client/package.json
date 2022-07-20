@@ -10,7 +10,7 @@
   "name": "embeds-reference-integration",
   "type": "module",
   "scripts": {
-    "dev:frontend": "react-scripts start",
+    "dev:frontend": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "test:ci": "cross-env CI=true react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
