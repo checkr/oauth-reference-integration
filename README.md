@@ -1,6 +1,6 @@
-# Development Setup
+# Developing
 
-## Install all dependencies:
+## Install dependencies
 
 ```shell
 yarn setup
@@ -8,8 +8,8 @@ yarn setup
 
 ## Setup Environment Variables
 
-> Create an `.env` file in the outermost directory and copy the variables from
-> `.env.example`
+Create an `.env` file in the outermost directory and copy the variables from
+`.env.example`
 
 ```
 CHECKR_API_URL='https://api.checkr-staging.com'
@@ -17,14 +17,14 @@ CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 CHECKR_OAUTH_CLIENT_SECRET=your_partner_application_client_secret
 ```
 
-> In the client directory, create an `.env` file and copy the variables from
-> `.env.example`
+In the client directory, create an `.env` file and copy the variables from
+`.env.example`
 
 ```
 REACT_APP_CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 ```
 
-## Run it locally:
+## Run it locally
 
 This implementation uses the free version of [ngrok](https://ngrok.com/) to
 enable testing of your integration in your localhost environment.
@@ -40,7 +40,19 @@ yarn dev:backend
 yarn dev:frontend
 ```
 
-# VS Code Recommended Settings
+## Run tests
+
+Run the following commands to run tests for both the backend and frontend.
+
+```shell
+yarn test:backend
+```
+
+```shell
+yarn test:frontend
+```
+
+## VS Code Recommended Settings
 
 The `.vscode` folder contains opt-in
 [Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings) and
