@@ -8,8 +8,8 @@ yarn setup
 
 ## Setup Environment Variables
 
-Create an `.env` file in the outermost directory and copy the variables from
-`.env.example`
+1. Create an `.env` file in the outermost directory and copy the variables from
+   `.env.example`
 
 ```
 CHECKR_API_URL='https://api.checkr-staging.com'
@@ -17,8 +17,8 @@ CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 CHECKR_OAUTH_CLIENT_SECRET=your_partner_application_client_secret
 ```
 
-In the client directory, create an `.env` file and copy the variables from
-`.env.example`
+2. In the client directory, create an `.env` file and copy the variables from
+   `.env.example`
 
 ```
 REACT_APP_CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
@@ -26,11 +26,25 @@ REACT_APP_CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 
 ## Run it locally
 
-This implementation uses the free version of [ngrok](https://ngrok.com/) to
-enable testing of your integration in your localhost environment.
+1. This implementation uses the free version of [ngrok](https://ngrok.com/) to
+   enable testing of your integration in your localhost environment. Run the
+   following command to start `ngrok`.
 
-Run the following commands in separate terminals to start the backend and the
-frontend.
+```
+ngrok http 8000
+```
+
+2. On the Checkr dashboard, edit your Partner Application settings. Update your
+   `OAuth redirect URL` and `OAUth webhook URL` with the value returned from
+   `ngrok`
+
+```
+OAuth redirect URL: {your-ngrok-url}
+OAuth webhook URL: {your-ngrok-url}/api/checkr/webhooks
+```
+
+3. Run the following commands in separate terminals to start the backend and the
+   frontend.
 
 ```shell
 yarn dev:backend
@@ -42,7 +56,7 @@ yarn dev:frontend
 
 ## Run tests
 
-Run the following commands to run tests for both the backend and frontend.
+Run the following commands to run tests for the backend and frontend.
 
 ```shell
 yarn test:backend
