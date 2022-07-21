@@ -27,7 +27,7 @@ sessionTokensRouter.post('/api/session-tokens', async (req, res) => {
     : null
   const credentials = Buffer.from(`${oauthToken}:`).toString('base64')
 
-  const response = await fetch(`${apiHost}/web_sdk/session_tokens`, {
+  const response = await fetch(`${apiHost}/v1/web_sdk/session_tokens`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${credentials}`,
