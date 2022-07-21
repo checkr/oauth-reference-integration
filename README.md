@@ -1,12 +1,12 @@
 # Development Setup
 
-1. Install all dependencies:
+## Install all dependencies:
 
 ```shell
 yarn setup
 ```
 
-2. Setup Environment Variables
+## Setup Environment Variables
 
 > Create an `.env` file in the outermost directory and copy the variables from
 > `.env.example`
@@ -24,7 +24,7 @@ CHECKR_OAUTH_CLIENT_SECRET=your_partner_application_client_secret
 REACT_APP_CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 ```
 
-3. Run it locally:
+## Run it locally:
 
 This implementation uses the free version of [ngrok](https://ngrok.com/) to
 enable testing of your integration in your localhost environment.
