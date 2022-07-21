@@ -10,11 +10,11 @@ export default function CheckrConnectButton({accountId}) {
   const checkrSignupFlowHref = accountId => {
     /* 
       Replace this URL with your Sign-up Flow URL from your partner
-      application settings.  Your parnter application settings are in
+      application settings.  Your partner application settings are in
       https://dashboard.checkrhq-staging.net/account/applications
     */
     const signupFlowURL = new URL(
-      'https://partners.checkrhq-staging.net/authorize/b9253dbd0ee97ef54763c1ee/signup',
+      `https://partners.checkrhq-staging.net/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID}/signup`,
     )
 
     /* 
