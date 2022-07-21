@@ -9,7 +9,7 @@ import {
 } from '../helpers/index.js'
 
 const checkrRouter = express.Router()
-const checkrOAuthURL = process.env.CHECKR_OAUTH_URL
+const checkrApiURL = process.env.CHECKR_API_URL
 const checkrClientId = process.env.CHECKR_OAUTH_CLIENT_ID
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
@@ -31,7 +31,7 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
     headers: {'Content-Type': 'application/json'},
   }
 
-  const response = await fetch(`${checkrOAuthURL}/tokens`, options)
+  const response = await fetch(`${checkrApiURL}/oauth/tokens`, options)
   const jsonBody = await parseJSON(response)
 
   if (!response.ok) {
@@ -81,7 +81,7 @@ checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
     },
   }
 
-  const response = await fetch(`${checkrOAuthURL}/deauthorize`, options)
+  const response = await fetch(`${checkrApiURL}/oauth/deauthorize`, options)
   const jsonBody = parseJSON(response)
 
   if (!response.ok) {

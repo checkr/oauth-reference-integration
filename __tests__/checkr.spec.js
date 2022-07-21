@@ -30,7 +30,7 @@ describe('/api/checkr', () => {
     const expectedCheckrAccountId = faker.lorem.slug()
     const expectedAccessToken = faker.lorem.slug()
 
-    checkrApiMock.stubHttpPost(`${process.env.CHECKR_OAUTH_URL}/tokens`, {
+    checkrApiMock.stubHttpPost(`${process.env.CHECKR_API_URL}/oauth/tokens`, {
       access_token: expectedAccessToken,
       checkr_account_id: expectedCheckrAccountId,
     })
@@ -75,7 +75,7 @@ describe('/api/checkr', () => {
   //    existingAccessToken,
   //  )
 
-  //  checkrApiMock.stubHttpPost(`${process.env.CHECKR_OAUTH_URL}/deauthorize`, {
+  //  checkrApiMock.stubHttpPost(`${process.env.CHECKR_API_URL}/oauth/deauthorize`, {
   //    token: existingAccessToken,
   //  })
 
