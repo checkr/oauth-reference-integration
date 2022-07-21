@@ -1,5 +1,7 @@
 import 'dotenv/config'
+import chalk from 'chalk'
 import morgan from 'morgan'
+import ngrok from 'ngrok'
 import express from 'express'
 import candidatesRouter from './routes/candidates.js'
 import accountsRouter from './routes/accounts.js'
@@ -26,3 +28,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port)
+console.log(`Private API URL: http://localhost:${port}`)
+;(async () => {
+  const url = await ngrok.connect(port)
+  console.log(
+    chalk.bgGreen('OAuth webhook URL:'),
+    chalk.blue(`${url}/api/checkr/webhooks`),
+  )
+  console.log(
+    chalk.bgGreen('OAuth redirect URL:'),
+    chalk.blue(`${url}/api/checkr/oauth`),
+  )
+})()

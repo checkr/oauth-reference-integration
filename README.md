@@ -27,31 +27,20 @@ REACT_APP_CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 ## Run it locally
 
 1. This implementation uses the free version of [ngrok](https://ngrok.com/) to
-   enable testing of your integration in your localhost environment. Run the
-   following command to start `ngrok`.
+   enable testing of your integration in your localhost environment. Run the app
+   locally.
 
 ```
-ngrok http 8000
+yarn dev
 ```
 
-2. On the Checkr dashboard, edit your Partner Application settings. Update your
-   `OAuth redirect URL` and `OAUth webhook URL` with the value returned from
-   `ngrok`
+2. Use the values of _OAuth webhook URL_ and _OAuth redirect URL_ in the server
+   output in your
+   [Partner Application Settings](https://dashboard.checkrhq-staging.net/account/applications).
 
 ```
-OAuth redirect URL: {your-ngrok-url}
-OAuth webhook URL: {your-ngrok-url}/api/checkr/webhooks
-```
-
-3. Run the following commands in separate terminals to start the backend and the
-   frontend.
-
-```shell
-yarn dev:backend
-```
-
-```shell
-yarn dev:frontend
+OAuth redirect URL: https://{your-ngrok-url}/api/checkr/oauth
+OAuth webhook URL: https://{your-ngrok-url}/api/checkr/webhooks
 ```
 
 ## Run tests

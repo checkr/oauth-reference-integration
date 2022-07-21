@@ -13,8 +13,8 @@ const checkrApiURL = process.env.CHECKR_API_URL
 const checkrClientId = process.env.CHECKR_OAUTH_CLIENT_ID
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
-checkrRouter.post('/api/checkr/oauth', async (req, res) => {
-  if (!req.body.code || !req.body.accountId) {
+checkrRouter.get('/api/checkr/oauth', async (req, res) => {
+  if (!req.query.code || !req.query.state) {
     res.status(400).send({
       errors: ['request body must contain a code and an accountId'],
     })
@@ -24,7 +24,7 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      code: req.body.code,
+      code: req.query.code,
       client_id: checkrClientId,
       client_secret: checkrClientSecret,
     }),
@@ -44,7 +44,7 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   }
 
   const db = await database()
-  const account = db.data.accounts.find(a => a.id === req.body.accountId)
+  const account = db.data.accounts.find(a => a.id === req.query.state)
 
   if (!account) {
     res.status(404).send({
@@ -58,7 +58,12 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
     id: jsonBody.checkr_account_id,
   }
   await db.write()
-  res.status(200).send(jsonBody)
+
+  if (process.env.NODE_ENV === 'production') {
+    res.status(200).sendFile('index.html', {root: '../client/build'})
+  } else {
+    res.status(200).redirect('http://localhost:3000/')
+  }
 })
 
 checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
