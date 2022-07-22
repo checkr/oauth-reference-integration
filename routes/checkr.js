@@ -13,6 +13,12 @@ const checkrOAuthURL = process.env.CHECKR_OAUTH_URL
 const checkrClientId = process.env.CHECKR_OAUTH_CLIENT_ID
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
+// Initial Setup
+// ---------------
+
+// Setup a private endpoint to handle Checkr Oauth, we will require
+// - a ```code``` obtained from the Checkr sign-up flow
+// - an account for our backend to create an Oauth access token for
 checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   if (!req.body.code || !req.body.accountId) {
     res.status(400).send({
@@ -31,6 +37,17 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
     headers: {'Content-Type': 'application/json'},
   }
 
+  // Send a request from your backend to Checkr for an OAuth access token
+  // ---------------
+
+  // Send a ```HTTP POST``` to ```{checkr-api-url}/oauth/tokens```
+  // In the JSON payload send
+
+  //     {
+  //       code: <code-from-sign-up-flow-redirect>,
+  //       client_id: <your-partner-application-client-id>,
+  //       client_secret: <your-partner-application-client-secret>,
+  //     }
   const response = await fetch(`${checkrOAuthURL}/tokens`, options)
   const jsonBody = await parseJSON(response)
 
@@ -53,6 +70,17 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
     return
   }
 
+  // Checkr responds with an OAuth access token and your Checkr account id
+  // ---------------
+
+  // Upon a successful request Checkr will respond with the following payload
+  //
+  //     {
+  //       access_token: <some-access-token>,
+  //       checkr_account_id: <some-id>,
+  //     }
+  //
+  // Save this information in your database, make sure to not store this token in plain text.
   account.checkrAccount = {
     accessToken: encrypt(jsonBody.access_token),
     id: jsonBody.checkr_account_id,

@@ -1,28 +1,28 @@
 import {Button} from 'react-bootstrap'
 
-/* 
-  The first step to connecting your customer accounts to Checkr is to create a
-  CheckrConnectButton. This button will redirect your customers to Checkr
-  when they link their account
-*/
+// Connect your account to Checkr
+// ---------------
+//
+// The first step to connecting your customer accounts to Checkr is to create a
+// ```CheckrConnectButton```. This button will redirect your customers to Checkr
+// when they link their account
 
 export default function CheckrConnectButton({accountId}) {
   const checkrSignupFlowHref = accountId => {
-    /* 
-      Replace this URL with your Sign-up Flow URL from your partner
-      application settings.  Your parnter application settings are in
-      https://dashboard.checkrhq-staging.net/account/applications
-    */
+    // Navigate to your Partner Application's Sign-up flow link
+    // ---------------
+    //
+    // Replace this URL with your Sign-up Flow URL from your partner
+    // application settings. Your partner application settings can be found in
+    // https://dashboard.checkrhq-staging.net/account/applications
     const signupFlowURL = new URL(
       'https://partners.checkrhq-staging.net/authorize/b9253dbd0ee97ef54763c1ee/signup',
     )
 
-    /* 
-      Define a state variable that will help you identify which account is
-      connecting to Checkr. In this case, we will use the accountId as the
-      state variable. This state value will be used later to verify the account 
-      connection
-    */
+    // Define a state variable that will help you identify which account is
+    // connecting to Checkr. In this case, we will use the accountId as the
+    // state variable. This state value will be used later to verify the account
+    // connection
     signupFlowURL.searchParams.append('state', accountId)
     return signupFlowURL.href
   }
