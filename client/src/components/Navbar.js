@@ -15,7 +15,7 @@ export default function NavBar({createToast, children, account}) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({token: account.checkrAccount.accessToken}),
+      body: JSON.stringify({encryptedToken: account.checkrAccount.accessToken}),
     }
 
     const handleDisconnect = async () => {
