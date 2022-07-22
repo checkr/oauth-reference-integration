@@ -43,6 +43,9 @@ client/coverage
 # production
 client/build
 
+# generated docs
+client/public/docs
+
 # misc
 client/.DS_Store
 client/.env.local

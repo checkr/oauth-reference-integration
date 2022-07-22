@@ -35,6 +35,10 @@ const prodDB = async () => {
     ),
   )
   await db.read()
+  // Migrate data by updating seedData.js Each prod deploy will overwrite the
+  // existing data in S3 with seedData.js
+  db.data = seedData
+  await db.write()
   return db
 }
 
