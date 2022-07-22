@@ -4,16 +4,13 @@ import checkrRouter from '../routes/checkr.js'
 import {faker} from '@faker-js/faker'
 import {
   createAccountWithCheckrAccountId,
-  //createAccountWithCheckrAccessToken,
+  createAccountWithCheckrAccessToken,
   findAccountWithCheckrId,
   findAccountWithId,
 } from './testSupport/helpers/accountHelper.js'
 import {getValidSignature} from './testSupport/helpers/webhooksHelper.js'
-import {
-  //  encrypt,
-  decrypt,
-  clearDB,
-} from './testSupport/helpers/dbHelper.js'
+import {clearDB} from './testSupport/helpers/dbHelper.js'
+import {encrypt, decrypt} from '../encryption.js'
 import testSeedData from './testSupport/testSeedData.js'
 import mockBackend from '../client/src/__tests__/testSupport/helpers/mockBackend.js'
 
@@ -43,7 +40,7 @@ describe('/api/checkr', () => {
 
     const updatedAccount = await findAccountWithId(existingAccountId)
     expect(updatedAccount.checkrAccount.id).toEqual(expectedCheckrAccountId)
-    expect(decrypt(updatedAccount.checkrAccount.accessToken)).toEqual(
+    expect(await decrypt(updatedAccount.checkrAccount.accessToken)).toEqual(
       expectedAccessToken,
     )
   })
@@ -66,29 +63,23 @@ describe('/api/checkr', () => {
     expect(account.checkrAccount.credentialed).toEqual(true)
   })
 
-  // TODO: for DX-377
-  // This test is failing because it does not stub the token value with a key, iv, and encryptedData
-  //
-  //it('should deauthorize a Checkr account', async () => {
-  //  const existingAccessToken = encrypt(faker.lorem.slug())
-  //  const account = await createAccountWithCheckrAccessToken(
-  //    existingAccessToken,
-  //  )
+  it('should deauthorize a Checkr account', async () => {
+    const plaintextToken = faker.lorem.slug()
+    const encryptedToken = await encrypt(plaintextToken)
+    const account = await createAccountWithCheckrAccessToken(encryptedToken)
 
-  //  checkrApiMock.stubHttpPost(`${process.env.CHECKR_OAUTH_URL}/deauthorize`, {
-  //    token: existingAccessToken,
-  //  })
+    checkrApiMock.stubHttpPost(`${process.env.CHECKR_OAUTH_URL}/deauthorize`)
 
-  //  const disconnectBody = {
-  //    token: existingAccessToken,
-  //  }
+    const disconnectBody = {
+      encryptedToken: encryptedToken,
+    }
 
-  //  const disconnect = await checkrApi
-  //    .post('/api/checkr/disconnect')
-  //    .send(disconnectBody)
+    const disconnect = await checkrApi
+      .post('/api/checkr/disconnect')
+      .send(disconnectBody)
 
-  //  expect(disconnect.status).toEqual(204)
-  //  const updatedAccount = await findAccountWithId(account.id)
-  //  expect(updatedAccount.checkrAccount).toBe(undefined)
-  //})
+    expect(disconnect.status).toEqual(204)
+    const updatedAccount = await findAccountWithId(account.id)
+    expect(updatedAccount.deauthorized).toBe(true)
+  })
 })

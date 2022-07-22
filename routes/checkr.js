@@ -2,11 +2,11 @@ import express from 'express'
 import database from '../db.js'
 import fetch from 'node-fetch'
 import {
-  encrypt,
-  decrypt,
   parseJSON,
   validCheckrSignature,
+  findAccountWithMatchingToken,
 } from '../helpers/index.js'
+import {encrypt, decrypt} from '../encryption.js'
 
 const checkrRouter = express.Router()
 const checkrOAuthURL = process.env.CHECKR_OAUTH_URL
@@ -82,7 +82,7 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   //
   // Save this information in your database, make sure to not store this token in plain text.
   account.checkrAccount = {
-    accessToken: encrypt(jsonBody.access_token),
+    accessToken: await encrypt(jsonBody.access_token),
     id: jsonBody.checkr_account_id,
   }
   await db.write()
@@ -90,17 +90,17 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
 })
 
 checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
-  if (!req.body.token) {
+  if (!req.body.encryptedToken) {
     res.status(400).send({
-      errors: ['request body must contain a token'],
+      errors: ['request body must contain an encryptedToken'],
     })
     return
   }
 
-  const token = decrypt(req.body.token)
-
-  const credentials = `${Buffer.from(`${token}:`, 'utf-8').toString('base64')}`
-
+  const plaintextToken = await decrypt(req.body.encryptedToken)
+  const credentials = `${Buffer.from(`${plaintextToken}:`, 'utf-8').toString(
+    'base64',
+  )}`
   const options = {
     method: 'POST',
     headers: {
@@ -110,27 +110,17 @@ checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
   }
 
   const response = await fetch(`${checkrOAuthURL}/deauthorize`, options)
-  const jsonBody = parseJSON(response)
-
   if (!response.ok) {
-    res.status(422)
-    res.send({
-      error: [jsonBody.error],
+    const jsonBody = parseJSON(response)
+    res.status(422).send({
+      errors: jsonBody.errors,
     })
   } else {
     const db = await database()
-    const accountToDeauthorize = db.data.accounts.find(
-      a => a.checkrAccount && decrypt(a.checkrAccount.accessToken) === token,
+    const accountToDeauthorize = await findAccountWithMatchingToken(
+      db.data.accounts,
+      plaintextToken,
     )
-
-    if (!accountToDeauthorize) {
-      res.status(404).send({
-        errors: [`cannot find account associated with request`],
-      })
-      return
-    }
-
-    delete accountToDeauthorize.checkrAccount
     accountToDeauthorize.deauthorized = true
     await db.write()
     res.status(204).end()
@@ -168,10 +158,9 @@ checkrRouter.post('/api/checkr/webhooks', async (req, res) => {
       break
     case 'token.deauthorized':
       const checkrAccessToken = req.body.data.object.access_code
-      const accountToDeauthorize = db.data.accounts.find(
-        a =>
-          a.checkrAccount &&
-          decrypt(a.checkrAccount.accessToken) === checkrAccessToken,
+      const accountToDeauthorize = await findAccountWithMatchingToken(
+        db.data.accounts,
+        checkrAccessToken,
       )
 
       if (!accountToDeauthorize) {
