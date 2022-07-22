@@ -1,18 +1,12 @@
 import React from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
-import AccountPage from './components/account/AccountPage.js'
+import App from './components/App.js'
 import './styles/index.css'
-import {QueryClient, QueryClientProvider} from 'react-query'
-
-const queryClient = new QueryClient()
+import {QueryClientProvider} from 'react-query'
+import queryClient from './QueryClient.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AccountPage />} />
-      </Routes>
-    </BrowserRouter>
+    <App />
   </QueryClientProvider>,
 )

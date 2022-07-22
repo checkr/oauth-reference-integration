@@ -2,16 +2,15 @@ import React from 'react'
 import mockBackend from './testSupport/helpers/mockBackend.js'
 import {rest} from 'msw'
 import {render, screen, waitFor} from '@testing-library/react'
-import {CandidatesPageObject} from './testSupport/page_objects/Candidates.js'
-import CandidatesPage from '../components/candidates/CandidatesPage.js'
-import {QueryClient, QueryClientProvider} from 'react-query'
 import {candidates as candidates_fixture} from './testSupport/fixtures/candidates.json'
-
-const queryClient = new QueryClient()
+import queryClient from '../QueryClient.js'
+import {QueryClientProvider} from 'react-query'
+import CandidatesPageObject from './testSupport/page_objects/Candidates.js'
+import Candidates from '../components/candidates/Candidates.js'
 
 const Page = () => (
   <QueryClientProvider client={queryClient}>
-    <CandidatesPage />
+    <Candidates />
   </QueryClientProvider>
 )
 

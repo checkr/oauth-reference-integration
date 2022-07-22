@@ -89,6 +89,4 @@ class CandidatesPageObject {
   }
 }
 
-module.exports = {
-  CandidatesPageObject,
-}
+export default CandidatesPageObject

@@ -1,7 +1,7 @@
 import {waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-class AccountPageObject {
+class AppPageObject {
   constructor(screen) {
     this.screen = screen
   }
@@ -47,4 +47,4 @@ class AccountPageObject {
   }
 }
 
-export default AccountPageObject
+export default AppPageObject

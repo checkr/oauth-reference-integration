@@ -6,8 +6,6 @@
   "editor.guides.bracketPairs": true,
   "editor.snippetSuggestions": "top",
   "editor.wordBasedSuggestions": false,
-  "editor.wordWrap": "bounded",
-  "editor.wordWrapColumn": 80,
   "editor.suggest.localityBonus": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "[javascript]": {

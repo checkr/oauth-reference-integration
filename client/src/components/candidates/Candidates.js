@@ -1,33 +1,14 @@
 import React, {useState} from 'react'
 import {Accordion, Alert, Button, Col, Container, Row} from 'react-bootstrap'
-import {useQuery, useMutation, useQueryClient} from 'react-query'
-import {fetchCandidates, editOrAddCandidate} from '../../api/index.js'
+import {useCandidates} from '../../hooks/useCandidates.js'
 import Candidate from './Candidate.js'
 import CandidateModal from './Modal.js'
-
-const newCandidate = {
-  email: '',
-  name: '',
-  phone: '',
-  step: '',
-  notes: '',
-}
 
 export default function CandidatesPage() {
   const [currentCandidate, setCurrentCandidate] = useState({})
   const [showModal, setShowModal] = useState(false)
-  const queryClient = useQueryClient()
-
-  const {isLoading, isError, isSuccess, data} = useQuery(
-    'candidates',
-    fetchCandidates,
-  )
-
-  const mutation = useMutation(editOrAddCandidate, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('candidates')
-    },
-  })
+  const {candidates, create, update} = useCandidates()
+  const showCandidatesFound = candidates.data && candidates.data.length !== 0
 
   const onChangeHandler = ({name, value}) => {
     setCurrentCandidate({
@@ -36,18 +17,16 @@ export default function CandidatesPage() {
     })
   }
 
-  const showCandidatesFound = data && data.length !== 0
-
   return (
     <Container className="Candidates" fluid>
       <span
         role="alert"
-        aria-busy={isLoading}
+        aria-busy={candidates.isLoading}
         aria-live="polite"
         data-testid="loading"
       ></span>
-      {isError && <p>Something went wrong...</p>}
-      {isSuccess && (
+      {candidates.isError && <p>Something went wrong...</p>}
+      {candidates.isSuccess && (
         <>
           <Row>
             <h2 className="mt-5">Candidate Pipeline</h2>
@@ -70,7 +49,7 @@ export default function CandidatesPage() {
           <Row>
             {showCandidatesFound ? (
               <Accordion flush>
-                {data.map(
+                {candidates.data.map(
                   ({id, email, name, phone, notes, step, createdAt}, index) => (
                     <Candidate
                       key={index}
@@ -82,7 +61,10 @@ export default function CandidatesPage() {
                       step={step}
                       createdAt={createdAt}
                       handleEdit={() => {
-                        setCurrentCandidate({...data[index], ...{index}})
+                        setCurrentCandidate({
+                          ...candidates.data[index],
+                          ...{index},
+                        })
                         setShowModal(true)
                       }}
                     />
@@ -96,10 +78,19 @@ export default function CandidatesPage() {
             )}
           </Row>
           <CandidateModal
-            candidate={currentCandidate || newCandidate}
+            candidate={
+              currentCandidate || {
+                email: '',
+                name: '',
+                phone: '',
+                step: '',
+                notes: '',
+              }
+            }
             isOpen={showModal}
             handleSave={() => {
-              mutation.mutate(currentCandidate)
+              if (currentCandidate.id) update.mutate(currentCandidate)
+              else create.mutate(currentCandidate)
               setShowModal(false)
             }}
             handleClose={() => setShowModal(false)}
