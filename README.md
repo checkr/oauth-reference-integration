@@ -53,3 +53,11 @@ The `.vscode` folder contains opt-in
 [Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings) and
 [Extension Recommendations](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)
 that the Checkr team recommends using when working on this repository.
+
+# Known Issues
+
+## msw testing library has a bug in node17 and node18
+
+This node17 and node18 [bug](https://github.com/mswjs/msw/issues/1349) will
+cause issues in some of our tests. While these problems are being fixed, we are
+using node v16.16.0 for now.
