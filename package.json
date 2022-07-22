@@ -22,7 +22,7 @@
     "start": "node server.js",
     "heroku-postbuild": "yarn docs && cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "lint:js": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx",
-    "lint:js:fix": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx --ext json --fix",
+    "lint:js:fix": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx --fix",
     "lint:style": "stylelint \"**/*.{css,scss}\"",
     "lint:style:fix": "stylelint --fix \"**/*.{css,scss}\""
   },
