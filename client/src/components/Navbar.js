@@ -16,7 +16,6 @@ export default function NavBar({createToast, children, account}) {
           <span className="px-1">Acme HR</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Documentation />
         {account && account.checkrAccount ? (
           <Settings createToast={createToast} account={account} />
         ) : (
@@ -41,7 +40,7 @@ function Settings({createToast, account}) {
 
   return (
     <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="d-flex justify-content-end flex-grow-1 pe-3">
+      <Nav className="justify-content-end flex-grow-1 pe-3">
         <NavDropdown title="John Doe" align={{lg: 'end'}}>
           <NavDropdown.Item
             onClick={async () => {
@@ -85,27 +84,6 @@ function Settings({createToast, account}) {
 
 function User() {
   return (
-    <Navbar.Text className="d-flex justify-content-end pe-3">
-      John Doe
-    </Navbar.Text>
-  )
-}
-
-function Documentation() {
-  const navigate = useNavigate()
-
-  return (
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="justify-content-end flex-grow-1 pe-3">
-        <NavDropdown title="Documentation" align={{lg: 'end'}}>
-          <NavDropdown.Item onClick={() => navigate('/docs/oauth')}>
-            OAuth
-          </NavDropdown.Item>
-          <NavDropdown.Item onClick={() => navigate('/docs/session-token')}>
-            Session Tokens
-          </NavDropdown.Item>
-        </NavDropdown>
-      </Nav>
-    </Navbar.Collapse>
+    <Navbar.Text className="justify-content-end pe-3">John Doe</Navbar.Text>
   )
 }
