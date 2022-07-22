@@ -3,7 +3,8 @@ import fetch from 'node-fetch'
 import database from '../db.js'
 import jwt from 'jsonwebtoken'
 import bearerToken from 'express-bearer-token'
-import {decrypt, parseJSON} from '../helpers/index.js'
+import {parseJSON} from '../helpers/index.js'
+import {decrypt} from '../encryption.js'
 
 const sessionTokensRouter = express.Router().use(bearerToken())
 const apiHost = process.env.CHECKR_API_URL
@@ -29,7 +30,7 @@ sessionTokensRouter.post('/api/session-tokens', async (req, res) => {
   const db = await database()
   const account = db.data.accounts[0]
   const oauthToken = account.checkrAccount
-    ? decrypt(account.checkrAccount.accessToken)
+    ? await decrypt(account.checkrAccount.accessToken)
     : null
   const credentials = Buffer.from(`${oauthToken}`).toString('base64')
 
