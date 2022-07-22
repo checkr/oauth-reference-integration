@@ -1,6 +1,7 @@
 import database from '../../../db.js'
 import {v4 as uuidv4} from 'uuid'
 import {faker} from '@faker-js/faker'
+import {encrypt} from '../../../encryption.js'
 
 const createAccountWithCheckrAccountId = async id => {
   const db = await database()
@@ -12,7 +13,7 @@ const createAccountWithCheckrAccountId = async id => {
     updatedAt: now,
     checkrAccount: {
       id: id,
-      accessToken: faker.lorem.slug(),
+      accessToken: await encrypt(faker.lorem.slug()),
     },
   })
   await db.write()
@@ -44,7 +45,7 @@ const findAccountWithCheckrId = async id => {
   )
 }
 
-const createAccountWithCheckrAccessToken = async token => {
+const createAccountWithCheckrAccessToken = async encryptedToken => {
   const db = await database()
   const now = new Date()
   const newAccount = {
@@ -54,7 +55,7 @@ const createAccountWithCheckrAccessToken = async token => {
     updatedAt: now,
     checkrAccount: {
       id: faker.lorem.slug(),
-      accessToken: token,
+      accessToken: encryptedToken,
     },
   }
   db.data.accounts.push(newAccount)

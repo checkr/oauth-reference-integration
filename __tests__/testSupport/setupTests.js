@@ -6,4 +6,6 @@ export default async function () {
   process.env.NODE_ENV = 'test'
   process.env.NODE_OPTIONS = '--experimental-vm-modules'
   process.env.NODE_NO_WARNINGS = 1 // Mute experimental warning logs in console.
+  process.env.ENCRYPTION_SECRET_KEY =
+    '65520b062cff37a7b7632d0da163025dc39b17497bb16de6c42c3820da88c825'
 }

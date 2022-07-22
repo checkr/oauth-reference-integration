@@ -35,7 +35,7 @@ function Settings({createToast, account}) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({token: account.checkrAccount.accessToken}),
+    body: JSON.stringify({encryptedToken: account.checkrAccount.accessToken}),
   }
 
   return (
