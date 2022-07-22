@@ -9,7 +9,6 @@ import sessionTokensRouter from './routes/session-tokens.js'
 import oauthRouter from './routes/oauth.js'
 
 const port = process.env.PORT || 8000
-const authtoken = process.env.NGROK_AUTH_TOKEN
 
 const app = express()
 app
@@ -31,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(port)
 console.log(`Private API URL: http://localhost:${port}`)
 ;(async () => {
-  const url = await ngrok.connect({authtoken, addr: port})
+  const url = await ngrok.connect(port)
   console.log(
     chalk.bgGreen('OAuth webhook URL:'),
     chalk.blue(`${url}/api/checkr/webhooks`),

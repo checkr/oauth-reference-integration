@@ -15,7 +15,6 @@ yarn setup
 CHECKR_API_URL='https://api.checkr-staging.com'
 CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
 CHECKR_OAUTH_CLIENT_SECRET=your_partner_application_client_secret
-NGROK_AUTH_TOKEN=your_ngrok_account_auth_token
 ENCRYPTION_SECRET_KEY_FROM_SECURE_VAULT='65520b062cff37a7b7632d0da163025dc39b17497bb16de6c42c3820da88c825'
 ```
 
