@@ -3,7 +3,7 @@ import {useMutation, useQuery} from 'react-query'
 import {parseJSON} from '../helpers/parseJSON.js'
 import queryClient from '../QueryClient.js'
 
-export function useAccount() {
+export function useCustomerAccount() {
   const account = useQuery(
     'account',
     async () => {

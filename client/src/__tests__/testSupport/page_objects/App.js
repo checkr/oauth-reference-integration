@@ -24,7 +24,7 @@ class AppPageObject {
     expect(this.screen.getByText('Connect to Checkr')).toBeInTheDocument()
   }
 
-  async expectWaitingForCredentialedAccountMessage() {
+  async expectWaitingForCredentialedCheckrAccountMessage() {
     await waitFor(() => {
       expect(
         this.screen.getByText(
@@ -34,7 +34,7 @@ class AppPageObject {
     })
   }
 
-  async expectDeauthorizedAccountMessage() {
+  async expectDeauthorizedCheckrAccountMessage() {
     await waitFor(() => {
       expect(
         this.screen.getByText('Your Checkr account has been deauthorized'),

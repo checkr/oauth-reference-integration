@@ -44,7 +44,7 @@ describe('App', () => {
     render(<Page />)
     await accountPage.initialLoad()
 
-    await accountPage.expectWaitingForCredentialedAccountMessage()
+    await accountPage.expectWaitingForCredentialedCheckrAccountMessage()
   })
 
   it('displays candidates page when credentialed checkrAccount exists', async () => {
@@ -75,6 +75,6 @@ describe('App', () => {
     render(<Page />)
     await accountPage.initialLoad()
 
-    await accountPage.expectDeauthorizedAccountMessage()
+    await accountPage.expectDeauthorizedCheckrAccountMessage()
   })
 })
