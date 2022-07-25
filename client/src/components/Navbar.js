@@ -3,22 +3,22 @@ import {toastSuccess, toastFailure} from '../helpers/toasts.js'
 import queryClient from '../QueryClient.js'
 
 export default function NavBar({createToast, children, account}) {
-  function User() {
-    return (
-      <Navbar.Text className="justify-content-end pe-3">John Doe</Navbar.Text>
-    )
-  }
+  const dropDownItems = {
+    Documentation: () =>
+      window.open(
+        'https://github.com/checkr/embeds-reference-integration#readme',
+      ),
+    Disconnect: async () => {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          encryptedToken: account.checkrAccount.accessToken,
+        }),
+      }
 
-  function Settings({createToast, account}) {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({encryptedToken: account.checkrAccount.accessToken}),
-    }
-
-    const handleDisconnect = async () => {
       try {
         const response = await fetch('/api/checkr/disconnect', options)
         if (!response.ok) {
@@ -34,7 +34,7 @@ export default function NavBar({createToast, children, account}) {
           queryClient.invalidateQueries('account')
           createToast(
             toastSuccess({
-              body: 'Your account has been deauthorized successfully.',
+              body: 'Your account has been disconnected successfully. Please wait while Checkr finalizes your account deauthorization.',
             }),
           )
         }
@@ -46,19 +46,7 @@ export default function NavBar({createToast, children, account}) {
         )
         console.error(e)
       }
-    }
-
-    return (
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="justify-content-end flex-grow-1 pe-3">
-          <NavDropdown title="John Doe" align={{lg: 'end'}}>
-            <NavDropdown.Item onClick={handleDisconnect}>
-              Disconnect
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-      </Navbar.Collapse>
-    )
+    },
   }
 
   return (
@@ -73,11 +61,19 @@ export default function NavBar({createToast, children, account}) {
           <span className="px-1">Acme HR</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        {account && account.checkrAccount ? (
-          <Settings createToast={createToast} account={account} />
-        ) : (
-          <User />
-        )}
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-end flex-grow-1 pe-3">
+            <NavDropdown title="John Doe" align={{lg: 'end'}}>
+              {Object.entries(dropDownItems).map(
+                ([description, handleClick]) => (
+                  <NavDropdown.Item key={description} onClick={handleClick}>
+                    {description}
+                  </NavDropdown.Item>
+                ),
+              )}
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
         {children}
       </Container>
     </Navbar>
