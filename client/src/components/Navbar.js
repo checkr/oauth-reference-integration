@@ -3,6 +3,7 @@ import {toastSuccess, toastFailure} from '../helpers/toasts.js'
 import queryClient from '../QueryClient.js'
 
 export default function NavBar({createToast, children, account}) {
+  const disconnectedAccount = account && !account.checkrAccount
   const dropDownItems = {
     Documentation: () =>
       window.open(
@@ -61,11 +62,21 @@ export default function NavBar({createToast, children, account}) {
           <Nav className="justify-content-end flex-grow-1 pe-3">
             <NavDropdown title="John Doe" align={{lg: 'end'}}>
               {Object.entries(dropDownItems).map(
-                ([description, handleClick]) => (
-                  <NavDropdown.Item key={description} onClick={handleClick}>
-                    {description}
-                  </NavDropdown.Item>
-                ),
+                ([description, handleClick]) => {
+                  if (disconnectedAccount && description === 'Disconnect')
+                    return undefined
+                  else
+                    return (
+                      <>
+                        <NavDropdown.Item
+                          key={description}
+                          onClick={handleClick}
+                        >
+                          {description}
+                        </NavDropdown.Item>
+                      </>
+                    )
+                },
               )}
             </NavDropdown>
           </Nav>
