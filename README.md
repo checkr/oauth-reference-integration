@@ -77,10 +77,10 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- |-------------------------------------| -------------------------------------------------------------------------------------- |
-| [oauth.js]()                                                                                                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
+| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- |-------------------------------------|---------------------------------------------------------------------------------------|
+| [oauth.js]()                                                                                                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
