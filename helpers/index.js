@@ -3,13 +3,6 @@ const {createHmac, timingSafeEqual} = await import('node:crypto')
 
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
-const validCheckrSignature = (signature, payload) => {
-  const expectedMac = createHmac('sha256', checkrClientSecret)
-    .update(JSON.stringify(payload))
-    .digest('hex')
-  return timingSafeEqual(Buffer.from(signature), Buffer.from(expectedMac))
-}
-
 const parseJSON = async response => {
   const text = await response.text()
 
