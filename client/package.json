@@ -10,7 +10,7 @@
   "name": "embeds-reference-integration",
   "type": "module",
   "scripts": {
-    "dev:frontend": "react-scripts start",
+    "dev:frontend": "env-cmd -f ../.env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "test:ci": "cross-env CI=true react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
@@ -23,6 +23,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.1.3",
+    "env-cmd": "^10.1.0",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",

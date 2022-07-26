@@ -37,7 +37,8 @@ yarn test:frontend
 This implementation uses the free version of [ngrok](https://ngrok.com/) to
 enable testing of your integration in your localhost environment.
 
-Run the following commands in separate terminals to start the backend and the frontend.
+Run the following commands in separate terminals to start the backend and the
+frontend.
 
 ```shell
 yarn dev:backend

@@ -53,11 +53,7 @@ export default function NavBar({createToast, children, account}) {
     <Navbar bg="dark" expand="lg" sticky="top">
       <Container fluid>
         <Navbar.Brand className="d-flex align-items-center">
-          <img
-            src={process.env.PUBLIC_URL + 'logo.png'}
-            className="logo"
-            alt="brand-logo"
-          />
+          <img src={'logo.png'} className="logo" alt="brand-logo" />
           <span className="px-1">Acme HR</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
