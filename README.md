@@ -53,8 +53,8 @@ your customers. This described in more detail in our
 
 | Component                                                                                                                                       | Responsibility | Code walkthrough                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------------------------------------------|
-| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Does foo       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Does bar       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [oauth.js]()                                                                                                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
