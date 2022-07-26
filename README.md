@@ -1,63 +1,96 @@
-# Development Setup
+# Reference Integration
 
-1. Install all dependencies:
+![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/node.js.yml/badge.svg?branch=main)
 
-```shell
-yarn setup
+
+This is a sample application demonstrating an end to end Checkr integration. It outlines best practices and patterns we see Checkr integrations adopt, and will help you develop a Checkr certified integration. It focuses on two use-cases:
+* How to use the [Checkr-Hosted Signup flow](https://docs.checkr.com/partners/#section/Getting-Started/Connect-your-customers-to-Checkr) to connect your customers to Checkr. 
+* How to order background checks and report results via [Checkr Embeds](https://docs.checkr.com/embeds).
+
+You can refer to this application if you are building either one or both use-cases. 
+
+<br />
+
+![Demo](docs/images/demo.gif)
+
+<br />
+
+# Contents
+
+* [Live Sandbox](#live-sandbox)
+* [Connecting customers](#connecting-customers)
+* [Using Embeds to order background checks](#using-embeds)
+* [Resources](#resources)
+* [Running it locally](#running-it-locally)
+* [Got feedback?](#got-feedback)
+
+## Live sandbox
+
+An instance of this application is hosted at [checkr-embeds-integration.herokuapp.com](https://checkr-embeds-integration.herokuapp.com). It is connected to a demo staging Checkr account which does not run real background checks.
+
+You can also deploy this using your own Heroku account and connect it your Checkr account.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/checkr/embeds-reference-integration)
+
+
+## Connecting customers
+
+With Checkr OAuth, your customers can easily connect their Checkr account with your product. It gives your product the ability to make API calls on behalf of your customers. This described in more detail in our [partner guide](https://docs.checkr.com/partners/#section/Getting-Started/Connect-your-customers-to-Checkr).
+
+#### Application components
+
+| Component                                                                                                                                       | Responsibility | Code walkthrough                                                                       | 
+|-------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------------------------------------------------------------------------------------|
+| [oauth.js]()                                                                                                                                    | Does foo       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Does bar       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
+
+```mermaid
+sequenceDiagram
+    participant oauth.js
+    participant iframe
+    participant viewscreen
+    oauth.js->>iframe: loads html w/ iframe url
+    iframe->>viewscreen: request template
+    viewscreen->>iframe: html & javascript
+    iframe->>oauth.js: iframe ready
+    oauth.js->>iframe: set mermaid data on iframe
+    iframe->>iframe: render mermaid
 ```
 
-2. Setup Environment Variables
+## Using Embeds to order background checks
 
-> Create an `.env` file and copy the variables from `.env.example`
+Embeds provide Javascript and React components to quickly build an experience to order background checks and view results. Read more about it [here](https://docs.checkr.com/embeds/).  
 
-```
-CHECKR_API_URL='https://api.checkr-staging.com/v1'
-CHECKR_OAUTH_URL='https://api.checkr-staging.com/oauth'
-CHECKR_OAUTH_CLIENT_ID=your_partner_application_client_id
-CHECKR_OAUTH_CLIENT_SECRET=your_partner_application_client_secret
-ENCRYPTION_SECRET_KEY_FROM_SECURE_VAULT='65520b062cff37a7b7632d0da163025dc39b17497bb16de6c42c3820da88c825'
-```
+#### Application components
 
-3. Run tests locally:
+| Component                                                                                                                                       | Responsibility | Code walkthrough                                                                       | 
+|-------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------------------------------------------------------------------------------------|
+| [oauth.js]()                                                                                                                                    | Does foo       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Does bar       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
 
-Backend tests:
-
-```shell
-yarn test:backend
-```
-
-Watch frontend tests:
-
-```shell
-yarn test:frontend
+```mermaid
+sequenceDiagram
+    participant oauth.js
+    participant iframe
+    participant viewscreen
+    oauth.js->>iframe: loads html w/ iframe url
+    iframe->>viewscreen: request template
+    viewscreen->>iframe: html & javascript
+    iframe->>oauth.js: iframe ready
+    oauth.js->>iframe: set mermaid data on iframe
+    iframe->>iframe: render mermaid
 ```
 
-3. Run it locally:
+## Resources
 
-This implementation uses the free version of [ngrok](https://ngrok.com/) to
-enable testing of your integration in your localhost environment.
+* [API docs](https://docs.checkr.com)
+* [Partner Guide](https://docs.checkr.com/partners)
+* [Embeds docs](https://docs.checkr.com/embeds)
 
-Run the following commands in separate terminals to start the backend and the frontend.
+## Running it locally
 
-```shell
-yarn dev:backend
-```
+View the [development page](docs/Developing.md) to run this project locally.
 
-```shell
-yarn dev:frontend
-```
+## Got feedback?
 
-# VS Code Recommended Settings
-
-The `.vscode` folder contains opt-in
-[Workspace Settings](https://code.visualstudio.com/docs/getstarted/settings) and
-[Extension Recommendations](https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions)
-that the Checkr team recommends using when working on this repository.
-
-# Known Issues
-
-## msw testing library has a bug in node17 and node18
-
-This node17 and node18 [bug](https://github.com/mswjs/msw/issues/1349) will
-cause issues in some of our tests. While these problems are being fixed, we are
-using node v16.16.0 for now.
+[Open an issue](https://github.com/checkr/embeds-reference-integration/issues) in this repository to ask a question or give us feedback.
