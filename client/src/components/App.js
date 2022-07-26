@@ -10,14 +10,14 @@
       and create an <access_token> to validate requests. Once this token is saved
       in the database, you will be redirected back to this React application.
 
-  2. Account is not credentialed
+  2. Account is uncredentialed
     
-    * After account connection your Account must be credentialed by Checkr, this 
+    * After account connection your Checkr Account must be credentialed by Checkr, this 
       process may take 1-3 days. If your account is configured to have pre-credentialed 
       accounts the page will update once the <account.credentialed> webhook has been 
-      successfully processed.
+      successfully processed by your backend.
 
-  3. Account is connected and credentialed
+  3. Account is credentialed
   
     * Add/Edit candidates
     * Request/View background checks using Checkr Embeds
@@ -25,7 +25,6 @@
 
 import {useState} from 'react'
 import {useCustomerAccount} from '../hooks/useCustomerAccount.js'
-import {getCheckrAccountStatus} from '../helpers/getCheckrAccountStatus.js'
 import Navbar from './Navbar.js'
 import Loading from './Loading.js'
 import Candidates from './candidates/Candidates.js'
@@ -36,12 +35,6 @@ import Notifications from './Notifications.js'
 export default function App() {
   const [toasts, setToasts] = useState([])
   const {account} = useCustomerAccount()
-
-  const {
-    disconnectedCheckrAccount,
-    uncredentialedCheckrAccount,
-    credentialedCheckrAccount,
-  } = getCheckrAccountStatus(account)
 
   return (
     <div>
@@ -64,7 +57,7 @@ export default function App() {
       {account.isLoading && <Loading />}
       {account.isSuccess && (
         <>
-          {disconnectedCheckrAccount && (
+          {account.data && account.data.checkrAccount.state === 'disconnected' && (
             <CheckrAccountStatus
               headerContent="Acme HR + Checkr"
               textContent="Connect your Acme HR account with Checkr to run background 
@@ -73,16 +66,20 @@ export default function App() {
               <CheckrConnectButton accountId={account.data.id} />
             </CheckrAccountStatus>
           )}
-          {uncredentialedCheckrAccount && (
-            <CheckrAccountStatus
-              headerContent="Your Checkr account is waiting to be credentialed for use"
-              textContent="Before you can create background check invitations, Checkr 
+          {account.data &&
+            account.data.checkrAccount.state === 'uncredentialed' && (
+              <CheckrAccountStatus
+                headerContent="Your Checkr account is waiting to be credentialed for use"
+                textContent="Before you can create background check invitations, Checkr 
                 must credentialize your business. This process can take 1-3 days, please 
                 come back later. If it has been longer than 3 days, please contact Checkr 
                 customer support."
-            />
-          )}
-          {credentialedCheckrAccount && <Candidates />}
+              />
+            )}
+          {account.data &&
+            account.data.checkrAccount.state === 'credentialed' && (
+              <Candidates />
+            )}
         </>
       )}
     </div>

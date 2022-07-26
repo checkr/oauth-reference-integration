@@ -84,7 +84,9 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   account.checkrAccount = {
     accessToken: await encrypt(jsonBody.access_token),
     id: jsonBody.checkr_account_id,
+    state: 'uncredentialed',
   }
+
   await db.write()
 
   if (process.env.NODE_ENV === 'production') {
@@ -151,6 +153,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
       }
 
       accountToCredential.checkrAccount.credentialed = true
+      accountToCredential.checkrAccount.state = 'credentialed'
       await db.write()
       res.status(200).end()
       break
@@ -168,7 +171,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
         return
       }
 
-      delete accountToDeauthorize.checkrAccount
+      accountToDeauthorize.checkrAccount = {state: 'disconnected'}
       await db.write()
       res.status(204).end()
       break
