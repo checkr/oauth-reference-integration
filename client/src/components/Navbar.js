@@ -1,6 +1,5 @@
 import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import {toastSuccess, toastFailure} from '../helpers/toasts.js'
-import queryClient from '../QueryClient.js'
 
 export default function NavBar({createToast, children, account}) {
   const disconnectedCheckrAccount = account && !account.checkrAccount
@@ -32,7 +31,6 @@ export default function NavBar({createToast, children, account}) {
             }),
           )
         } else {
-          queryClient.invalidateQueries('account')
           createToast(
             toastSuccess({
               body: 'Your account has been disconnected successfully. Please wait while Checkr finalizes your account deauthorization.',
