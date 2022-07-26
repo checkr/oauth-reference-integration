@@ -20,7 +20,7 @@
     "test:frontend": "cd client/ && yarn test",
     "test:frontend:ci": "cd client/ && yarn test:ci",
     "start": "node server.js",
-    "heroku-postbuild": "yarn docs && cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "heroku-postbuild": "yarn docs && cd client && yarn install && yarn build",
     "lint:js": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx",
     "lint:js:fix": "eslint . --ext .js --ext .jsx --ext .ts --ext .tsx --fix",
     "lint:style": "stylelint \"**/*.{css,scss}\"",
