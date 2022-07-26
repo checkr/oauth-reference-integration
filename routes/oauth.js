@@ -122,13 +122,6 @@ oauthRouter.post('/api/checkr/disconnect', async (req, res) => {
       errors: jsonBody.errors,
     })
   } else {
-    const db = await database()
-    const accountToDeauthorize = await findAccountWithMatchingToken(
-      db.data.accounts,
-      plaintextToken,
-    )
-    accountToDeauthorize.deauthorized = true
-    await db.write()
     res.status(204).end()
   }
 })
@@ -176,7 +169,6 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
       }
 
       delete accountToDeauthorize.checkrAccount
-      accountToDeauthorize.deauthorized = true
       await db.write()
       res.status(204).end()
       break

@@ -25,12 +25,5 @@
         "credentialed": true
       }
     }
-  ],
-  "accounts_with_deauthorized_checkr_account": [
-    {
-      "id": "ce04e0a2-ecec-11ec-b7ed-f33adcba9538",
-      "name": "Our Favorite Customer",
-      "deauthorized": true
-    }
   ]
 }

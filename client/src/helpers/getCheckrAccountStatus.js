@@ -1,17 +1,12 @@
 export function getCheckrAccountStatus(account) {
-  const deauthorizedCheckrAccount = account.data && account.data.deauthorized
   const connectedCheckrAccount = account.data && account.data.checkrAccount
-  const disconnectedCheckrAccount =
-    account.data && !account.data.checkrAccount && !deauthorizedCheckrAccount
+  const disconnectedCheckrAccount = account.data && !account.data.checkrAccount
   const uncredentialedCheckrAccount =
     connectedCheckrAccount && !account.data.checkrAccount.credentialed
   const credentialedCheckrAccount =
-    connectedCheckrAccount &&
-    account.data.checkrAccount.credentialed &&
-    !deauthorizedCheckrAccount
+    connectedCheckrAccount && account.data.checkrAccount.credentialed
 
   return {
-    deauthorizedCheckrAccount,
     connectedCheckrAccount,
     disconnectedCheckrAccount,
     uncredentialedCheckrAccount,

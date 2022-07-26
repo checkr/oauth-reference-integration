@@ -4,7 +4,6 @@ import oauthRouter from '../routes/oauth.js'
 import {faker} from '@faker-js/faker'
 import {
   createAccountWithCheckrAccountId,
-  createAccountWithCheckrAccessToken,
   findAccountWithCheckrId,
   findAccountWithId,
 } from './testSupport/helpers/accountHelper.js'
@@ -67,7 +66,6 @@ describe('/api/checkr', () => {
   it('should deauthorize a Checkr account', async () => {
     const plaintextToken = faker.lorem.slug()
     const encryptedToken = await encrypt(plaintextToken)
-    const account = await createAccountWithCheckrAccessToken(encryptedToken)
 
     oauthAPIMock.stubHttpPost(`${process.env.CHECKR_API_URL}/oauth/deauthorize`)
 
@@ -80,7 +78,5 @@ describe('/api/checkr', () => {
       .send(disconnectBody)
 
     expect(disconnect.status).toEqual(204)
-    const updatedAccount = await findAccountWithId(account.id)
-    expect(updatedAccount.deauthorized).toBe(true)
   })
 })

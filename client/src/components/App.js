@@ -1,5 +1,5 @@
 /*
-  This page has 4 different views
+  This page has 3 different views
   
   1. Account has not been connected to Checkr
     
@@ -21,15 +21,9 @@
   
     * Add/Edit candidates
     * Request/View background checks using Checkr Embeds
-
-  4. Account has been deauthorized
-
-    * Checkr has deauthorized your account and you can no longer send invitations 
-      via the Dashboard or API
 */
 
 import {useState} from 'react'
-import {Button} from 'react-bootstrap'
 import {useCustomerAccount} from '../hooks/useCustomerAccount.js'
 import {getCheckrAccountStatus} from '../helpers/getCheckrAccountStatus.js'
 import Navbar from './Navbar.js'
@@ -41,11 +35,9 @@ import Notifications from './Notifications.js'
 
 export default function App() {
   const [toasts, setToasts] = useState([])
-  const {account, update} = useCustomerAccount()
+  const {account} = useCustomerAccount()
 
   const {
-    connectedCheckrAccount,
-    deauthorizedCheckrAccount,
     disconnectedCheckrAccount,
     uncredentialedCheckrAccount,
     credentialedCheckrAccount,
@@ -72,28 +64,6 @@ export default function App() {
       {account.isLoading && <Loading />}
       {account.isSuccess && (
         <>
-          {deauthorizedCheckrAccount && (
-            <CheckrAccountStatus
-              headerContent="Your Checkr account has been deauthorized"
-              textContent="This account is no longer credentialed and cannot send 
-              invitations via the Dashboard or API"
-            >
-              {connectedCheckrAccount ? (
-                <Button className="text-center" size="lg" disabled>
-                  Waiting for Checkr Account to be deleted...
-                </Button>
-              ) : (
-                <Button
-                  size="lg"
-                  onClick={() => {
-                    update.mutate(account.data.id, {deauthorized: false})
-                  }}
-                >
-                  Back
-                </Button>
-              )}
-            </CheckrAccountStatus>
-          )}
           {disconnectedCheckrAccount && (
             <CheckrAccountStatus
               headerContent="Acme HR + Checkr"
