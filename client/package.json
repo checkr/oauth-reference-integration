@@ -10,7 +10,7 @@
   "name": "embeds-reference-integration",
   "type": "module",
   "scripts": {
-    "dev:frontend": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
+    "dev:frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "test:ci": "cross-env CI=true react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
@@ -27,7 +27,6 @@
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
     "react-query": "^3.39.1",
-    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1"
   },
   "devDependencies": {

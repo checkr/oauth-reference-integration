@@ -40,7 +40,7 @@ sessionTokensRouter.post('/api/session-tokens', async (req, res) => {
   // Partner developers, building partner applications use the OAuth access token
   // acquired through Checkr OAuth to request session tokens.This is a pre-requisite for using ```embeds```.
 
-  const response = await fetch(`${apiHost}/web_sdk/session_tokens`, {
+  const response = await fetch(`${apiHost}/v1/web_sdk/session_tokens`, {
     headers: {
       'Content-Type': 'application/json',
       // Pass the OAuth token using ```Basic Authorization``` as the **username** with an empty **password**

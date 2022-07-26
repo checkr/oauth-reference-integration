@@ -7,24 +7,20 @@ import {
   accounts_with_deauthorized_checkr_account,
 } from './testSupport/fixtures/accounts.json'
 import {candidates as candidates_fixture} from './testSupport/fixtures/candidates.json'
-import AccountPageObject from './testSupport/page_objects/CheckrAccount.js'
-import {CandidatesPageObject} from './testSupport/page_objects/Candidates.js'
-import AccountPage from '../components/account/AccountPage.js'
-import {QueryClient, QueryClientProvider} from 'react-query'
-import {BrowserRouter as Router} from 'react-router-dom'
-
-const queryClient = new QueryClient()
+import queryClient from '../QueryClient'
+import {QueryClientProvider} from 'react-query'
+import AppPageObject from './testSupport/page_objects/App.js'
+import CandidatesPageObject from './testSupport/page_objects/Candidates.js'
+import App from '../components/App.js'
 
 const Page = () => (
   <QueryClientProvider client={queryClient}>
-    <Router>
-      <AccountPage />
-    </Router>
+    <App />
   </QueryClientProvider>
 )
 
-describe('CheckrAccount page', () => {
-  const accountPage = new AccountPageObject(screen)
+describe('App', () => {
+  const accountPage = new AppPageObject(screen)
   const backend = new mockBackend()
 
   beforeAll(() => backend.server.listen())
@@ -48,7 +44,7 @@ describe('CheckrAccount page', () => {
     render(<Page />)
     await accountPage.initialLoad()
 
-    await accountPage.expectWaitingForCredentialedAccountMessage()
+    await accountPage.expectWaitingForCredentialedCheckrAccountMessage()
   })
 
   it('displays candidates page when credentialed checkrAccount exists', async () => {
@@ -79,6 +75,6 @@ describe('CheckrAccount page', () => {
     render(<Page />)
     await accountPage.initialLoad()
 
-    await accountPage.expectDeauthorizedAccountMessage()
+    await accountPage.expectDeauthorizedCheckrAccountMessage()
   })
 })

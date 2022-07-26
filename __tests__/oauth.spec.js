@@ -1,6 +1,6 @@
 import express from 'express'
 import request from 'supertest'
-import checkrRouter from '../routes/checkr.js'
+import oauthRouter from '../routes/oauth.js'
 import {faker} from '@faker-js/faker'
 import {
   createAccountWithCheckrAccountId,
@@ -16,27 +16,28 @@ import mockBackend from '../client/src/__tests__/testSupport/helpers/mockBackend
 
 describe('/api/checkr', () => {
   const existingAccountId = testSeedData.accounts[0].id
-  const checkrApi = request(express().use(express.json()).use(checkrRouter))
-  const checkrApiMock = new mockBackend()
+  const oauthAPI = request(express().use(express.json()).use(oauthRouter))
+  const oauthAPIMock = new mockBackend()
 
   beforeEach(async () => await clearDB())
-  beforeAll(() => checkrApiMock.server.listen({onUnhandledRequest: 'bypass'}))
-  afterAll(() => checkrApiMock.server.close())
+  beforeAll(() => oauthAPIMock.server.listen({onUnhandledRequest: 'bypass'}))
+  afterAll(() => oauthAPIMock.server.close())
 
   it('should link a new Checkr account', async () => {
     const expectedCheckrAccountId = faker.lorem.slug()
     const expectedAccessToken = faker.lorem.slug()
+    const expectedCode = faker.lorem.slug()
 
-    checkrApiMock.stubHttpPost(`${process.env.CHECKR_OAUTH_URL}/tokens`, {
+    oauthAPIMock.stubHttpPost(`${process.env.CHECKR_API_URL}/oauth/tokens`, {
       access_token: expectedAccessToken,
       checkr_account_id: expectedCheckrAccountId,
     })
 
-    const response = await checkrApi
-      .post('/api/checkr/oauth')
-      .send({code: 'foobar', accountId: existingAccountId})
+    const response = await oauthAPI.get(
+      `/api/checkr/oauth?code=${expectedCode}&state=${existingAccountId}`,
+    )
 
-    expect(response.status).toEqual(200)
+    expect(response.status).toEqual(302) // expect redirect
 
     const updatedAccount = await findAccountWithId(existingAccountId)
     expect(updatedAccount.checkrAccount.id).toEqual(expectedCheckrAccountId)
@@ -53,7 +54,7 @@ describe('/api/checkr', () => {
       account_id: existingCheckrId,
     }
 
-    const response = await checkrApi
+    const response = await oauthAPI
       .post('/api/checkr/webhooks')
       .set({'x-checkr-signature': getValidSignature(requestBody)})
       .send(requestBody)
@@ -68,13 +69,13 @@ describe('/api/checkr', () => {
     const encryptedToken = await encrypt(plaintextToken)
     const account = await createAccountWithCheckrAccessToken(encryptedToken)
 
-    checkrApiMock.stubHttpPost(`${process.env.CHECKR_OAUTH_URL}/deauthorize`)
+    oauthAPIMock.stubHttpPost(`${process.env.CHECKR_API_URL}/oauth/deauthorize`)
 
     const disconnectBody = {
       encryptedToken: encryptedToken,
     }
 
-    const disconnect = await checkrApi
+    const disconnect = await oauthAPI
       .post('/api/checkr/disconnect')
       .send(disconnectBody)
 

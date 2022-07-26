@@ -8,8 +8,8 @@ import {
 } from '../helpers/index.js'
 import {encrypt, decrypt} from '../encryption.js'
 
-const checkrRouter = express.Router()
-const checkrOAuthURL = process.env.CHECKR_OAUTH_URL
+const oauthRouter = express.Router()
+const checkrApiURL = process.env.CHECKR_API_URL
 const checkrClientId = process.env.CHECKR_OAUTH_CLIENT_ID
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
@@ -19,8 +19,8 @@ const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 // Setup a private endpoint to handle Checkr Oauth, we will require
 // - a ```code``` obtained from the Checkr sign-up flow
 // - an account for our backend to create an Oauth access token for
-checkrRouter.post('/api/checkr/oauth', async (req, res) => {
-  if (!req.body.code || !req.body.accountId) {
+oauthRouter.get('/api/checkr/oauth', async (req, res) => {
+  if (!req.query.code || !req.query.state) {
     res.status(400).send({
       errors: ['request body must contain a code and an accountId'],
     })
@@ -30,7 +30,7 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      code: req.body.code,
+      code: req.query.code,
       client_id: checkrClientId,
       client_secret: checkrClientSecret,
     }),
@@ -48,7 +48,7 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   //       client_id: <your-partner-application-client-id>,
   //       client_secret: <your-partner-application-client-secret>,
   //     }
-  const response = await fetch(`${checkrOAuthURL}/tokens`, options)
+  const response = await fetch(`${checkrApiURL}/oauth/tokens`, options)
   const jsonBody = await parseJSON(response)
 
   if (!response.ok) {
@@ -61,11 +61,11 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
   }
 
   const db = await database()
-  const account = db.data.accounts.find(a => a.id === req.body.accountId)
+  const account = db.data.accounts.find(a => a.id === req.query.state)
 
   if (!account) {
     res.status(404).send({
-      errors: [`account with accountId: ${req.body} not found`],
+      errors: [`account with accountId: ${req.query.state} not found`],
     })
     return
   }
@@ -86,10 +86,15 @@ checkrRouter.post('/api/checkr/oauth', async (req, res) => {
     id: jsonBody.checkr_account_id,
   }
   await db.write()
-  res.status(200).send(jsonBody)
+
+  if (process.env.NODE_ENV === 'production') {
+    res.status(200).sendFile('index.html', {root: '../client/build'})
+  } else {
+    res.status(200).redirect('http://localhost:3000/')
+  }
 })
 
-checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
+oauthRouter.post('/api/checkr/disconnect', async (req, res) => {
   if (!req.body.encryptedToken) {
     res.status(400).send({
       errors: ['request body must contain an encryptedToken'],
@@ -109,7 +114,8 @@ checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
     },
   }
 
-  const response = await fetch(`${checkrOAuthURL}/deauthorize`, options)
+  const response = await fetch(`${checkrApiURL}/oauth/deauthorize`, options)
+
   if (!response.ok) {
     const jsonBody = parseJSON(response)
     res.status(422).send({
@@ -127,7 +133,7 @@ checkrRouter.post('/api/checkr/disconnect', async (req, res) => {
   }
 })
 
-checkrRouter.post('/api/checkr/webhooks', async (req, res) => {
+oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
   if (!validCheckrSignature(req.headers['x-checkr-signature'], req.body)) {
     res.status(400).send({errors: ['invalid x-checkr-signature']})
     return
@@ -152,7 +158,6 @@ checkrRouter.post('/api/checkr/webhooks', async (req, res) => {
       }
 
       accountToCredential.checkrAccount.credentialed = true
-      accountToCredential.showPrompts = true
       await db.write()
       res.status(200).end()
       break
@@ -180,4 +185,4 @@ checkrRouter.post('/api/checkr/webhooks', async (req, res) => {
   }
 })
 
-export default checkrRouter
+export default oauthRouter

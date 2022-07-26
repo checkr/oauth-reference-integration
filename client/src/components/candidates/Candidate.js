@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import {Embeds} from '@checkr/web-sdk'
 import {Accordion, Button, Card, Tabs, Tab} from 'react-bootstrap'
 
+const ReportsOverview = Embeds.ReportsOverview.useReact(React, ReactDOM)
+
 const styles = {
   '.btn-primary': {
     background: '#527a00',
@@ -28,8 +30,6 @@ const styles = {
     'text-decoration': 'none',
   },
 }
-
-const ReportsOverview = Embeds.ReportsOverview.useReact(React, ReactDOM)
 
 export default function Candidate({
   id,

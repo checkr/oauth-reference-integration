@@ -1,7 +1,7 @@
 import {waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-class AccountPageObject {
+class AppPageObject {
   constructor(screen) {
     this.screen = screen
   }
@@ -24,7 +24,7 @@ class AccountPageObject {
     expect(this.screen.getByText('Connect to Checkr')).toBeInTheDocument()
   }
 
-  async expectWaitingForCredentialedAccountMessage() {
+  async expectWaitingForCredentialedCheckrAccountMessage() {
     await waitFor(() => {
       expect(
         this.screen.getByText(
@@ -34,7 +34,7 @@ class AccountPageObject {
     })
   }
 
-  async expectDeauthorizedAccountMessage() {
+  async expectDeauthorizedCheckrAccountMessage() {
     await waitFor(() => {
       expect(
         this.screen.getByText('Your Checkr account has been deauthorized'),
@@ -47,4 +47,4 @@ class AccountPageObject {
   }
 }
 
-export default AccountPageObject
+export default AppPageObject
