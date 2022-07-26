@@ -10,7 +10,7 @@ import {encrypt, decrypt} from '../encryption.js'
 
 const oauthRouter = express.Router()
 const checkrApiURL = process.env.CHECKR_API_URL
-const checkrClientId = process.env.CHECKR_OAUTH_CLIENT_ID
+const checkrClientId = process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
 // Initial Setup
