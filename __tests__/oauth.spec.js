@@ -76,7 +76,7 @@ describe('/api/checkr', () => {
     }
 
     const disconnect = await oauthAPI
-      .post('/api/checkr/disconnect')
+      .post('/api/checkr/deauthorize')
       .send(disconnectBody)
 
     expect(disconnect.status).toEqual(204)
