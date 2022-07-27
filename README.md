@@ -52,21 +52,21 @@ your customers. This described in more detail in our
 #### Application components
 
 | Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------- |
 | [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
 | [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
-    participant oauth.js
-    participant iframe
-    participant viewscreen
-    oauth.js->>iframe: loads html w/ iframe url
-    iframe->>viewscreen: request template
-    viewscreen->>iframe: html & javascript
-    iframe->>oauth.js: iframe ready
-    oauth.js->>iframe: set mermaid data on iframe
-    iframe->>iframe: render mermaid
+    Note right of App Frontend: CheckrConnectButton pressed
+    Note right of Partner application host: Checkr Account created
+
+    App Frontend->>+Partner application host: Navigate to Checkr Sign-Up Flow URL
+    Partner application host->>+App Backend: Navigate to Redirect URL
+    App Backend->>-Checkr: Request OAuth Access token
+    Checkr->>+App Backend: Respond with OAuth Access token
+    App Backend->>Database: Persist and encrypt Oauth access token in database
+    App Backend->>-App Frontend: Redirect to Frontend
 ```
 
 ## Using Embeds to order background checks
@@ -77,22 +77,24 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
-| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| Component                                                                                                      | Responsibility                                 | Code walkthrough                                                                               |
+| -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [session-tokens.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/session-tokens.html) |
 
 ```mermaid
 sequenceDiagram
-    participant oauth.js
-    participant iframe
-    participant viewscreen
-    oauth.js->>iframe: loads html w/ iframe url
-    iframe->>viewscreen: request template
-    viewscreen->>iframe: html & javascript
-    iframe->>oauth.js: iframe ready
-    oauth.js->>iframe: set mermaid data on iframe
-    iframe->>iframe: render mermaid
+  rect rgb(249, 243, 223)
+      App Frontend->>+App Backend: Request Session Token
+      App Backend->>+Checkr: Request Session Token
+      Checkr->>-App Backend: Respond with Session Token
+      App Backend->>-App Frontend: Repond with Session Token
+      Note right of App Frontend: Shows loading state
+  end
+  rect rgb(152, 189, 243)
+    App Frontend->>+Checkr: Embed calls Checkr to request data
+    Checkr->>-App Frontend: Respond with data
+    Note right of App Frontend: UI renders with data
+  end
 ```
 
 ## Resources
