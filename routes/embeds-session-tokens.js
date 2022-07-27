@@ -48,7 +48,7 @@ sessionTokensRouter.post('/api/embeds-session-tokens', async (req, res) => {
   }
 
   const db = await database()
-  // The valid JWT contains the identifier we need to find the user's Checkr
+  // Next, we use the user information in the valid JWT to find their Checkr
   // access token.
   const account = db.data.find(a => a.id === validToken.sub)
   const oauthToken = await decrypt(account.checkrAccount.accessToken)
