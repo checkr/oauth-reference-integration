@@ -34,14 +34,6 @@ class AppPageObject {
     })
   }
 
-  async expectDeauthorizedCheckrAccountMessage() {
-    await waitFor(() => {
-      expect(
-        this.screen.getByText('Your Checkr account has been deauthorized'),
-      ).toBeInTheDocument()
-    })
-  }
-
   clickConnectToCheckr() {
     userEvent.click(this.screen.getByName('Connect to Checkr'))
   }
