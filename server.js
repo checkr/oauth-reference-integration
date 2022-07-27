@@ -11,7 +11,6 @@ import oauthRouter from './routes/oauth.js'
 const port = process.env.PORT || 8000
 
 const app = express()
-app
   .use(morgan('tiny'))
   .use(express.json())
   .use(candidatesRouter)
