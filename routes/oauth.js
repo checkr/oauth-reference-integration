@@ -10,7 +10,7 @@ import {encrypt, decrypt} from '../encryption.js'
 
 const oauthRouter = express.Router()
 const checkrApiURL = process.env.CHECKR_API_URL
-const checkrClientId = process.env.CHECKR_OAUTH_CLIENT_ID
+const checkrClientId = process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID
 const checkrClientSecret = process.env.CHECKR_OAUTH_CLIENT_SECRET
 
 // Initial Setup
@@ -84,7 +84,9 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   account.checkrAccount = {
     accessToken: await encrypt(jsonBody.access_token),
     id: jsonBody.checkr_account_id,
+    state: 'uncredentialed',
   }
+
   await db.write()
 
   if (process.env.NODE_ENV === 'production') {
@@ -122,13 +124,6 @@ oauthRouter.post('/api/checkr/disconnect', async (req, res) => {
       errors: jsonBody.errors,
     })
   } else {
-    const db = await database()
-    const accountToDeauthorize = await findAccountWithMatchingToken(
-      db.data.accounts,
-      plaintextToken,
-    )
-    accountToDeauthorize.deauthorized = true
-    await db.write()
     res.status(204).end()
   }
 })
@@ -157,7 +152,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
         return
       }
 
-      accountToCredential.checkrAccount.credentialed = true
+      accountToCredential.checkrAccount.state = 'credentialed'
       await db.write()
       res.status(200).end()
       break
@@ -175,8 +170,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
         return
       }
 
-      delete accountToDeauthorize.checkrAccount
-      accountToDeauthorize.deauthorized = true
+      accountToDeauthorize.checkrAccount = {state: 'disconnected'}
       await db.write()
       res.status(204).end()
       break

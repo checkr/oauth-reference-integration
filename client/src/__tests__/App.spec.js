@@ -4,7 +4,6 @@ import {
   accounts_without_checkr_account,
   accounts_with_uncredentialed_checkr_account,
   accounts_with_credentialed_checkr_account,
-  accounts_with_deauthorized_checkr_account,
 } from './testSupport/fixtures/accounts.json'
 import {candidates as candidates_fixture} from './testSupport/fixtures/candidates.json'
 import queryClient from '../QueryClient'
@@ -64,17 +63,5 @@ describe('App', () => {
         candidates_fixture.length,
       )
     })
-  })
-
-  it('displays "deauthorized account" message when the account has been deauthorized', async () => {
-    backend.stubHttpGet(
-      '/api/accounts',
-      accounts_with_deauthorized_checkr_account,
-    )
-
-    render(<Page />)
-    await accountPage.initialLoad()
-
-    await accountPage.expectDeauthorizedCheckrAccountMessage()
   })
 })

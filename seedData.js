@@ -5,6 +5,7 @@ const seedData = {
       name: 'Our Favorite Customer',
       createdAt: '2022-06-23T23:51:24.077Z',
       updatedAt: '2022-06-23T23:51:24.077Z',
+      checkrAccount: {state: 'disconnected'},
     },
   ],
   candidates: [

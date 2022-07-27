@@ -29,7 +29,7 @@ sessionTokensRouter.post('/api/session-tokens', async (req, res) => {
 
   const db = await database()
   const account = db.data.accounts[0]
-  const oauthToken = account.checkrAccount
+  const oauthToken = account.checkrAccount.accessToken
     ? await decrypt(account.checkrAccount.accessToken)
     : null
   const credentials = Buffer.from(`${oauthToken}`).toString('base64')

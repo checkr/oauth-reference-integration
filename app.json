@@ -8,9 +8,14 @@
   ],
   "env": {
     "CHECKR_API_URL": {
-      "description": "A secret key for verifying the integrity of signed cookies.",
+      "description": "Checkr's API domain",
       "required": true,
       "value": "https://api.checkr-staging.com"
+    },
+    "REACT_APP_CHECKR_PARTNER_URL": {
+      "description": "Partner application host",
+      "required": true,
+      "value": "https://partners.checkrhq-staging.net"
     },
     "CHECKR_OAUTH_CLIENT_ID": {
       "description": "Your partner application client id",
