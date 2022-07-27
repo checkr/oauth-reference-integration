@@ -2,7 +2,10 @@
   "accounts_without_checkr_account": [
     {
       "id": "ce04e0a2-ecec-11ec-b7ed-f33adcba9538",
-      "name": "Our Favorite Customer"
+      "name": "Our Favorite Customer",
+      "checkrAccount": {
+        "state": "disconnected"
+      }
     }
   ],
   "accounts_with_uncredentialed_checkr_account": [
@@ -11,7 +14,8 @@
       "name": "Our Favorite Customer",
       "checkrAccount": {
         "accessToken": "2f2884289872d622fc5e5e0121fa221560a6f2f6",
-        "id": "773e39b4a5e205414c6df032"
+        "id": "773e39b4a5e205414c6df032",
+        "state": "uncredentialed"
       }
     }
   ],
@@ -22,15 +26,9 @@
       "checkrAccount": {
         "accessToken": "2f2884289872d622fc5e5e0121fa221560a6f2f6",
         "id": "773e39b4a5e205414c6df032",
-        "credentialed": true
+        "credentialed": true,
+        "state": "credentialed"
       }
-    }
-  ],
-  "accounts_with_deauthorized_checkr_account": [
-    {
-      "id": "ce04e0a2-ecec-11ec-b7ed-f33adcba9538",
-      "name": "Our Favorite Customer",
-      "deauthorized": true
     }
   ]
 }

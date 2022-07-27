@@ -73,7 +73,6 @@ accountsRouter.put('/api/accounts/:id', async (req, res) => {
 
   const account = db.data.accounts[index]
   account.name = req.body.name
-  account.deauthorized = req.body.deauthorized
 
   await db.write()
   res.status(200).json(account)

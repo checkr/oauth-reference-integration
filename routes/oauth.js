@@ -79,6 +79,7 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   const checkrAccount = {
     accessToken: await encrypt(jsonBody.access_token),
     id: jsonBody.checkr_account_id,
+    state: 'uncredentialed',
   }
   const db = await database()
   const account = db.data.accounts.find(a => a.id === customerAccountId)
@@ -169,7 +170,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
       // Once you record that this Checkr account is credentialed, you can make
       // background check requests with the access token associated with this
       // account.
-      accountToCredential.checkrAccount.credentialed = true
+      accountToCredential.checkrAccount.state = 'credentialed'
       await db.write()
 
       // Successful ```HTTP Status Code 200``` responses to Checkr's webhook
@@ -211,7 +212,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
       // integration with their Checkr account, the ```checkr_account_id``` and
       // ```access_token``` will be regenerated.
       delete accountToDeauthorize.checkrAccount
-      accountToDeauthorize.deauthorized = true
+      accountToDeauthorize.checkrAccount = {state: 'disconnected'}
       await db.write()
       res.status(204).end()
       break
