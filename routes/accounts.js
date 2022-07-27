@@ -9,9 +9,27 @@ accountsRouter.get('/api/accounts', async (_, res) => {
   const db = await database()
   const accounts = db.data.accounts
 
-  accounts[0]['reference-integration-session-token'] = jwt.sign(
-    'some-token',
-    'supersecret',
+  // Warning: We simplify the creation of this token here because this
+  // implementaiton does not have a login system. In your system, this token
+  // should be created when the user logs in.
+  accounts[0]['userJWT'] = jwt.sign(
+    // JWT token contents
+    // {
+    //     "sub": "ce04e0a2-ecec-11ec-b7ed-f33adcba9538",
+    //     "name": "Our Favorite Customer",
+    //     "authorizations": {
+    //         "roles": [
+    //           "user"
+    //         ],
+    //         "permissions": [
+    //            "checkr_background_checks"
+    //         ]
+    //     },
+    //     "exp": 1958900863,
+    //     "iat": 1516239022
+    // }
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZTA0ZTBhMi1lY2VjLTExZWMtYjdlZC1mMzNhZGNiYTk1MzgiLCJuYW1lIjoiT3VyIEZhdm9yaXRlIEN1c3RvbWVyIiwiYXV0aG9yaXphdGlvbnMiOnsicm9sZXMiOlsidXNlciJdLCJwZXJtaXNzaW9ucyI6WyJjaGVja3JfYmFja2dyb3VuZF9jaGVja3MiXX0sImV4cCI6MTk1ODkwMDg2MywiaWF0IjoxNTE2MjM5MDIyfQ.DmKViZV3ux5C_yosGp9hhU9ueguq61iH43wt5GyHAAg',
+    process.env.JWT_HMAC_SECRET,
   )
 
   res.status(200).json(accounts)

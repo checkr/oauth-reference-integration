@@ -1,4 +1,5 @@
 import sodium from 'libsodium-wrappers'
+import jwt from 'jsonwebtoken'
 
 const key = process.env.ENCRYPTION_SECRET_KEY
 
@@ -23,10 +24,16 @@ const decrypt = async ({ciphertext, nonce}) => {
   return sodium.to_string(decrypted)
 }
 
-const keygen = async () => {
+const encryptionKeygen = async () => {
   await sodium.ready
   const key = Buffer.from(sodium.crypto_secretbox_keygen())
   return key.toString('hex')
 }
 
-export {encrypt, decrypt, keygen}
+const hmacKeygen = async () => {
+  await sodium.ready
+  const hmacKey = Buffer.from(sodium.crypto_auth_keygen())
+  return hmacKey.toString('hex')
+}
+
+export {encrypt, decrypt, encryptionKeygen, hmacKeygen}
