@@ -211,7 +211,6 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
       // ```checkrAccountId```. If your customer decides to reconnect your
       // integration with their Checkr account, the ```checkr_account_id``` and
       // ```access_token``` will be regenerated.
-      delete accountToDeauthorize.checkrAccount
       accountToDeauthorize.checkrAccount = {state: 'disconnected'}
       await db.write()
       res.status(204).end()
