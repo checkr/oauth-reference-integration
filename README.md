@@ -58,6 +58,8 @@ your customers. This described in more detail in our
 
 ```mermaid
 sequenceDiagram
+  autonumber
+
   rect rgb(226, 250, 233)
     Note right of App Frontend: CheckrConnectButton pressed
     Note right of Partner application host: Checkr Account created
@@ -85,6 +87,8 @@ order background checks and view results. Read more about it
 
 ```mermaid
 sequenceDiagram
+  autonumber
+
   rect rgb(249, 243, 223)
     App Frontend->>+App Backend: Request Session Token
     App Backend->>+Checkr: Request Session Token
