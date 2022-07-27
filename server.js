@@ -25,18 +25,22 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (_, res) => {
     res.sendFile('index.html', {root: reactBuild})
   })
+} else {
+  ;(async () => {
+    const url = await ngrok.connect(port)
+    console.log(
+      chalk.black.bgGreen(' OAuth webhook URL '),
+      chalk.blue(`${url}/api/checkr/webhooks`),
+    )
+    console.log(
+      chalk.black.bgGreen(' OAuth redirect URL '),
+      chalk.blue(`${url}/api/checkr/oauth`),
+    )
+  })()
 }
 
 app.listen(port)
-console.log(`Private API URL: http://localhost:${port}`)
-;(async () => {
-  const url = await ngrok.connect(port)
-  console.log(
-    chalk.bgGreen('OAuth webhook URL:'),
-    chalk.blue(`${url}/api/checkr/webhooks`),
-  )
-  console.log(
-    chalk.bgGreen('OAuth redirect URL:'),
-    chalk.blue(`${url}/api/checkr/oauth`),
-  )
-})()
+console.log(
+  chalk.black.bgWhite(' Private API URL '),
+  `http://localhost:${port}`,
+)
