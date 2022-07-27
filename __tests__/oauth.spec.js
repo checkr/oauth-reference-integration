@@ -60,7 +60,7 @@ describe('/api/checkr', () => {
 
     expect(response.status).toEqual(200)
     const account = await findAccountWithCheckrId(existingCheckrId)
-    expect(account.checkrAccount.credentialed).toEqual(true)
+    expect(account.checkrAccount.state).toEqual('credentialed')
   })
 
   it('should deauthorize a Checkr account', async () => {

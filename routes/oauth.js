@@ -152,7 +152,6 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
         return
       }
 
-      accountToCredential.checkrAccount.credentialed = true
       accountToCredential.checkrAccount.state = 'credentialed'
       await db.write()
       res.status(200).end()

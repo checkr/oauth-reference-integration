@@ -14,6 +14,7 @@ const createAccountWithCheckrAccountId = async id => {
     checkrAccount: {
       id: id,
       accessToken: await encrypt(faker.lorem.slug()),
+      state: 'credentialed',
     },
   })
   await db.write()
@@ -27,6 +28,7 @@ const createAccountWithName = async name => {
     name: name,
     createdAt: now,
     updatedAt: now,
+    checkrAccount: {state: 'disconnected'},
   }
   db.data.accounts.push(newAccount)
   await db.write()
@@ -56,6 +58,7 @@ const createAccountWithCheckrAccessToken = async encryptedToken => {
     checkrAccount: {
       id: faker.lorem.slug(),
       accessToken: encryptedToken,
+      state: 'credentialed',
     },
   }
   db.data.accounts.push(newAccount)
