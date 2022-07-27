@@ -33,7 +33,7 @@ export default function NavBar({createToast, children, account}) {
         } else {
           createToast(
             toastSuccess({
-              body: 'Your account has been disconnected successfully. Please wait while Checkr finalizes your account deauthorization.',
+              body: 'Your account has been deauthorized successfully. Please wait while Checkr finalizes your account deauthorization.',
             }),
           )
         }
@@ -63,7 +63,7 @@ export default function NavBar({createToast, children, account}) {
                 .filter(
                   ([description, handleClick]) =>
                     !(
-                      disconnectedCheckrAccount && description === 'Disconnect'
+                      disconnectedCheckrAccount && description === 'Deauthorize'
                     ),
                 )
                 .map(([description, handleClick]) => (
