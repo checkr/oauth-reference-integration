@@ -1,6 +1,6 @@
 # Reference Integration
 
-![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/node.js.yml/badge.svg?branch=main)
+![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/main.js.yml/badge.svg?branch=main)
 
 This is a sample application demonstrating an end to end Checkr integration. It
 outlines best practices and patterns we see Checkr integrations adopt, and will
