@@ -1,0 +1,43 @@
+{
+  "name": "Checkr Embeds Reference Integration",
+  "description": "Sample application demonstrating an end to end Checkr integration",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "CHECKR_API_URL": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "required": true,
+      "value": "https://api.checkr-staging.com"
+    },
+    "CHECKR_OAUTH_CLIENT_ID": {
+      "description": "Your partner application client id",
+      "required": true
+    },
+    "CHECKR_OAUTH_CLIENT_SECRET": {
+      "description": "Your partner application client secret",
+      "required": true
+    },
+    "ENCRYPTION_SECRET_KEY": {
+      "description": "Encryption key to be used for storing secrets",
+      "required": true,
+      "value": "65520b062cff37a7b7632d0da163025dc39b17497bb16de6c42c3820da88c825"
+    },
+    "S3_ACCESS_KEY_ID": {
+      "description": "S3 Access Key ID for data storage",
+      "required": true
+    },
+    "S3_ACCESS_KEY_SECRET": {
+      "description": "S3 Access Key Secret for data storage",
+      "required": true
+    },
+    "S3_BUCKET": {
+      "description": "S3 bucket for data storage",
+      "required": true
+    }
+  },
+  "keywords": ["node", "express", "static"],
+  "repository": "https://github.com/checkr/embeds-reference-integration"
+}
