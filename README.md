@@ -40,7 +40,7 @@ background checks.
 You can also deploy this using your own Heroku account and connect it your
 Checkr account.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/checkr/embeds-reference-integration)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Connecting customers
 
