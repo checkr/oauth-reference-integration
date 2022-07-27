@@ -1,6 +1,6 @@
 # Reference Integration
 
-![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/node.js.yml/badge.svg?branch=main)
+![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/main.js.yml/badge.svg?branch=main)
 
 This is a sample application demonstrating an end to end Checkr integration. It
 outlines best practices and patterns we see Checkr integrations adopt, and will
@@ -40,7 +40,7 @@ background checks.
 You can also deploy this using your own Heroku account and connect it your
 Checkr account.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/checkr/embeds-reference-integration)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Connecting customers
 
@@ -51,10 +51,10 @@ your customers. This described in more detail in our
 
 #### Application components
 
-| Component                                                                                                                                       | Responsibility | Code walkthrough                                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------- |
-| [oauth.js]()                                                                                                                                    | Does foo       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Does bar       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
+| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
+| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
@@ -77,10 +77,10 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                                                       | Responsibility | Code walkthrough                                                                       |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------- |
-| [oauth.js]()                                                                                                                                    | Does foo       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Does bar       | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/checkr.html) |
+| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
+| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram

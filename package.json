@@ -69,6 +69,10 @@
     "supertest": "^6.2.3",
     "watch": "^1.0.2"
   },
+  "engines": {
+    "yarn": "1.x",
+    "node": "16.x"
+  },
   "jest": {
     "transform": {},
     "testEnvironment": "node",
