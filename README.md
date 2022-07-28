@@ -25,7 +25,7 @@ use-cases.
 
 - [Live Sandbox](#live-sandbox)
 - [Connecting customers](#connecting-customers)
-- [Using Embeds to order background checks](#using-embeds)
+- [Using Embeds to order background checks](#using-embeds-to-order-background-checks)
 - [Resources](#resources)
 - [Running it locally](#running-it-locally)
 - [Got feedback?](#got-feedback)
