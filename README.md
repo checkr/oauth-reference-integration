@@ -66,10 +66,10 @@ sequenceDiagram
 
     App Frontend->>+Partner application host: Navigate to Checkr Sign-Up Flow URL
     Partner application host->>+App Backend: Navigate to Redirect URL
-    App Backend->>-Checkr: Request OAuth Access token
+    App Backend->>+Checkr: Request OAuth Access token
     Checkr->>+App Backend: Respond with OAuth Access token
-    App Backend->>Database: Persist and encrypt Oauth access token in database
-    App Backend->>-App Frontend: Redirect to Frontend
+    App Backend->>+Database: Persist and encrypt Oauth access token in database
+    App Backend->>+App Frontend: Redirect to Frontend
   end
 ```
 
@@ -92,13 +92,13 @@ sequenceDiagram
   rect rgb(249, 243, 223)
     App Frontend->>+App Backend: Request Session Token
     App Backend->>+Checkr: Request Session Token
-    Checkr->>-App Backend: Respond with Session Token
-    App Backend->>-App Frontend: Repond with Session Token
+    Checkr->>+App Backend: Respond with Session Token
+    App Backend->>+App Frontend: Repond with Session Token
     Note right of App Frontend: Shows loading state
   end
   rect rgb(152, 189, 243)
     App Frontend->>+Checkr: Embed calls Checkr to request data
-    Checkr->>-App Frontend: Respond with data
+    Checkr->>+App Frontend: Respond with data
     Note right of App Frontend: UI renders with data
   end
 ```
