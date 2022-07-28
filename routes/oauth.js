@@ -88,12 +88,7 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   }
 
   await db.write()
-
-  if (process.env.NODE_ENV === 'production') {
-    res.status(200).sendFile('index.html', {root: '../client/build'})
-  } else {
-    res.status(200).redirect('http://localhost:3000/')
-  }
+  res.status(200).redirect('/')
 })
 
 oauthRouter.post('/api/checkr/disconnect', async (req, res) => {
