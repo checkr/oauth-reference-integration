@@ -7,7 +7,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "name": "embeds-reference-integration",
+  "name": "oauth-reference-integration",
   "type": "module",
   "scripts": {
     "setup": "yarn install && cd client/ && yarn install",
