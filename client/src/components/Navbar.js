@@ -20,7 +20,7 @@ export default function NavBar({createToast, children, account}) {
       }
 
       try {
-        const response = await fetch('/api/checkr/disconnect', options)
+        const response = await fetch('/api/checkr/deauthorize', options)
         if (!response.ok) {
           const data = await response.json()
 
@@ -63,7 +63,7 @@ export default function NavBar({createToast, children, account}) {
                 .filter(
                   ([description, handleClick]) =>
                     !(
-                      disconnectedCheckrAccount && description === 'Disconnect'
+                      disconnectedCheckrAccount && description === 'Deauthorize'
                     ),
                 )
                 .map(([description, handleClick]) => (
