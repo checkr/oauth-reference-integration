@@ -49,9 +49,10 @@ export default function OAuthApp() {
     // Replace this URL value with your Sign-up Flow URL from your [partner
     // application](https://dashboard.checkrhq-staging.net/account/applications)
     // settings. Your URL is located next to the "Sign-up flow" section of your
-    // partner application configuration.
+    // partner application configuration. Your Sign-up Flow URL will be
+    // different depending on whether you mean to use staging or production.
     const signupFlowURL = new URL(
-      `https://partners.checkrhq-staging.net/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID}/signup`,
+      `${process.env.REACT_APP_CHECKR_PARTNER_URL}/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID}/signup`,
     )
 
     // ##### Set your sign-up flow ```state```
