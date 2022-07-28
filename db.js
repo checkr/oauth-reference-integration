@@ -16,10 +16,9 @@ const testDB = async () => {
 const devDB = async () => {
   const db = new Low(new JSONFile('localdb.json'))
   await db.read()
-  if (!db.data) {
-    db.data = seedData
-    await db.write()
-  }
+  // Migrate devDB data by updating seedData.js
+  db.data = seedData
+  await db.write()
   return db
 }
 
