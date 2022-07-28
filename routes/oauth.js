@@ -1,5 +1,15 @@
 // This module demonstrates how your Checkr integration can authorize itself
-// with OAuth to make requests against Checkr on your user's behalf.
+// with OAuth. OAuth authorization will enable your integration to make
+// requests against Checkr on your user's behalf. It will provide a working
+// code example for the following Checkr docs:
+// - [How to retrieve an OAuth access
+//   token from Checkr](https://docs.checkr.com/partners/#section/Getting-Started/Connect-your-customers-to-Checkr)
+// - [How to validate and respond to Checkr
+//   webhooks](https://docs.checkr.com/partners/#section/Webhooks/Responding-to-and-securing-webhooks)
+// - [How to receive the account.credentialed
+//   webhook](https://docs.checkr.com/partners/#section/Getting-Started/Customer-account-credentialing)
+// - [How to deauthorize your OAuth
+//   token](https://docs.checkr.com/partners/#section/Getting-Started/Display-customers'-connected-state-and-deauthorization)
 
 import express from 'express'
 import database from '../db.js'
@@ -30,27 +40,27 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   //   this scenario each user will have a Checkr access token associated with
   //   them. So our ```state``` value is the ID of the user who will have this
   //   token. In your product, the user may be your customer's account.
-  const oauthCode = req.query.code
+  const oauthAuthorizationCode = req.query.code
   const userAccountId = req.query.state
 
   // Next, you will request an OAuth access token from Checkr. This token will
   // be used for all your requests to Checkr on behalf of this user. This
   // request will require the following variables:
   // - ```CHECKR_API_URL``` which is ```https://api.checkr-staging.com``` in the staging environment and ```https://api.checkr.com``` in production
-  // - ```CHECKR_OAUTH_CLIENT_ID``` which is the OAuth Client ID from your [partner application](https://dashboard.checkrhq-staging.net/account/applications)
+  // - ```REACT_APP_CHECKR_OAUTH_CLIENT_ID``` which is the OAuth Client ID from your [partner application](https://dashboard.checkrhq-staging.net/account/applications). This variable is prefaced with "REACT_APP" because it is also used in our UI.
   // - ```CHECKR_OAUTH_CLIENT_SECRET``` which is the OAuth Client Secret from your [partner application](https://dashboard.checkrhq-staging.net/account/applications)
-  // - ```oauthCode``` from the request query parameters sent by Checkr
+  // - ```oauthAuthorizationCode``` from the request query parameters sent by Checkr
   //
-  // The ```CHECKR_API_URL```, ```CHECKR_OAUTH_CLIENT_ID```, and ```CHECKR_OAUTH_CLIENT_SECRET```
+  // The ```CHECKR_API_URL```, ```REACT_APP_CHECKR_OAUTH_CLIENT_ID```, and ```CHECKR_OAUTH_CLIENT_SECRET```
   // variables are taken from the app environment (via process.env) because
   // these values are different depending on whether you are using the Checkr
   // production environment or the Checkr staging environment.
   const response = await fetch(`${process.env.CHECKR_API_URL}/oauth/tokens`, {
     method: 'POST',
     body: JSON.stringify({
-      client_id: process.env.CHECKR_OAUTH_CLIENT_ID,
+      client_id: process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID,
       client_secret: process.env.CHECKR_OAUTH_CLIENT_SECRET,
-      code: oauthCode,
+      code: oauthAuthorizationCode,
     }),
     headers: {'Content-Type': 'application/json'},
   })
@@ -69,8 +79,8 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   // response body:
   //
   //     {
-  //       "access_token": "your user's OAuth access token",
-  //       "checkr_account_id": "your user's Checkr account ID",
+  //       "access_token": "the Checkr Account OAuth access token for your user",
+  //       "checkr_account_id": "the Checkr account ID for your user",
   //     }
   //
   // Save this information along with your user's information so that you
