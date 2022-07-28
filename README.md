@@ -60,16 +60,31 @@ your customers. This described in more detail in our
 sequenceDiagram
   autonumber
 
-  rect rgb(226, 250, 233)
+  rect rgb(250, 250, 250)
     Note right of App Frontend: CheckrConnectButton pressed
-    Note right of Partner application host: Checkr Account created
+    Note right of Partner customer signup flow: Checkr Account created
 
-    App Frontend->>+Partner application host: Navigate to Checkr Sign-Up Flow URL
-    Partner application host->>+oauth.js: Navigate to redirect URL
+    App Frontend->>+Partner customer signup flow: Navigate to Checkr Sign-Up Flow URL
+    Partner customer signup flow->>+oauth.js: Navigate to redirect URL
     oauth.js->>+Checkr: Request OAuth Access token
     Checkr->>+oauth.js: Respond with OAuth Access token
-    oauth.js->>+Database: Persist and encrypt Oauth access token in database
-    oauth.js->>+App Frontend: Redirect to Frontend
+    oauth.js->>+App Database: Persist and encrypt OAuth Access token in App Database
+    oauth.js->>+App Frontend: Redirect to App Frontend
+  end
+  rect rgb(150, 180, 100)
+    Note right of App Frontend: Account is uncredentialed
+    Checkr->>+oauth.js: Send account.credentialed webhook
+    oauth.js->>+App Database: Update Checkr account state
+    Note right of App Frontend: Account is credentialed
+  end
+  rect rgb(100, 100, 250)
+    App Frontend->>+Checkr: POST /oauth/deauthorize
+    Checkr->>+oauth.js: HTTP 200
+    Note right of Checkr: Token has been deauthorized
+    oauth.js->>+App Frontend: HTTP 204
+    Checkr->>+oauth.js: Send token.deauthorized webhook
+    oauth.js->>+App Database: Delete access token from database
+    Note right of App Frontend: Account is disconnected
   end
 ```
 
