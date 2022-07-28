@@ -65,11 +65,11 @@ sequenceDiagram
     Note right of Partner application host: Checkr Account created
 
     App Frontend->>+Partner application host: Navigate to Checkr Sign-Up Flow URL
-    Partner application host->>+App Backend: Navigate to Redirect URL
-    App Backend->>+Checkr: Request OAuth Access token
-    Checkr->>+App Backend: Respond with OAuth Access token
-    App Backend->>+Database: Persist and encrypt Oauth access token in database
-    App Backend->>+App Frontend: Redirect to Frontend
+    Partner application host->>+oauth.js: Navigate to redirect URL
+    oauth.js->>+Checkr: Request OAuth Access token
+    Checkr->>+oauth.js: Respond with OAuth Access token
+    oauth.js->>+Database: Persist and encrypt Oauth access token in database
+    oauth.js->>+App Frontend: Redirect to Frontend
   end
 ```
 
@@ -81,27 +81,9 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                      | Responsibility                                 | Code walkthrough                                                                               |
-| -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| [session-tokens.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/session-tokens.html) |
-
-```mermaid
-sequenceDiagram
-  autonumber
-
-  rect rgb(249, 243, 223)
-    App Frontend->>+App Backend: Request Session Token
-    App Backend->>+Checkr: Request Session Token
-    Checkr->>+App Backend: Respond with Session Token
-    App Backend->>+App Frontend: Repond with Session Token
-    Note right of App Frontend: Shows loading state
-  end
-  rect rgb(152, 189, 243)
-    App Frontend->>+Checkr: Embed calls Checkr to request data
-    Checkr->>+App Frontend: Respond with data
-    Note right of App Frontend: UI renders with data
-  end
-```
+| Component                                                                                                      | Responsibility                                 | Code walkthrough                                                                               | Diagram                                                                |
+| -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [session-tokens.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
 
 ## Resources
 
