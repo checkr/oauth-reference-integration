@@ -7,7 +7,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "name": "embeds-reference-integration",
+  "name": "oauth-reference-integration",
   "type": "module",
   "scripts": {
     "dev:frontend": "env-cmd -f ../.env react-scripts start",
