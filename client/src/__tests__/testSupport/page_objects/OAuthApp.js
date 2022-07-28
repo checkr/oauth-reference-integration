@@ -1,7 +1,7 @@
 import {waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-class AppPageObject {
+class OAuthAppPageObject {
   constructor(screen) {
     this.screen = screen
   }
@@ -39,4 +39,4 @@ class AppPageObject {
   }
 }
 
-export default AppPageObject
+export default OAuthAppPageObject

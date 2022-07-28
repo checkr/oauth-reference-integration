@@ -8,18 +8,18 @@ import {
 import {candidates as candidates_fixture} from './testSupport/fixtures/candidates.json'
 import queryClient from '../QueryClient'
 import {QueryClientProvider} from 'react-query'
-import AppPageObject from './testSupport/page_objects/App.js'
+import OAuthAppPageObject from './testSupport/page_objects/OAuthApp.js'
 import CandidatesPageObject from './testSupport/page_objects/Candidates.js'
-import App from '../components/App.js'
+import OAuthApp from '../components/OAuthApp.js'
 
 const Page = () => (
   <QueryClientProvider client={queryClient}>
-    <App />
+    <OAuthApp />
   </QueryClientProvider>
 )
 
-describe('App', () => {
-  const accountPage = new AppPageObject(screen)
+describe('OAuthApp', () => {
+  const accountPage = new OAuthAppPageObject(screen)
   const backend = new mockBackend()
 
   beforeAll(() => backend.server.listen())
