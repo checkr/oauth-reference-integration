@@ -7,11 +7,11 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "name": "embeds-reference-integration",
+  "name": "oauth-reference-integration",
   "type": "module",
   "scripts": {
     "dev:frontend": "env-cmd -f ../.env react-scripts start",
-    "build": "env-cmd -f ../.env react-scripts build",
+    "build": "env-cmd --silent -f ../.env react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "test:ci": "cross-env CI=true react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "eject": "react-scripts eject"

@@ -95,11 +95,7 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   // shows them that we are waiting for Checkr to credentialize their account.
   // Their account must be credentialed before they can make any background
   // check requests with the stored OAuth access token.
-  if (process.env.NODE_ENV === 'production') {
-    res.status(200).sendFile('index.html', {root: '../client/build'})
-  } else {
-    res.status(200).redirect('http://localhost:3000/')
-  }
+  res.status(200).redirect('/')
 
   // Be sure to register this endpoint as the OAuth Redirect URL in your
   // [partner application

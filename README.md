@@ -1,6 +1,6 @@
 # Reference Integration
 
-![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/main.js.yml/badge.svg?branch=main)
+![Build status](https://github.com/checkr/oauth-reference-integration/actions/workflows/main.js.yml/badge.svg?branch=main)
 
 This is a sample application demonstrating an end to end Checkr integration. It
 outlines best practices and patterns we see Checkr integrations adopt, and will
@@ -33,7 +33,7 @@ use-cases.
 ## Live sandbox
 
 An instance of this application is hosted at
-[checkr-embeds-integration.herokuapp.com](https://checkr-embeds-integration.herokuapp.com).
+[checkr-oauth-integration.herokuapp.com](https://checkr-oauth-integration.herokuapp.com).
 It is connected to a demo staging Checkr account which does not run real
 background checks.
 
@@ -53,8 +53,8 @@ your customers. This described in more detail in our
 
 | Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
-| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
@@ -79,8 +79,8 @@ order background checks and view results. Read more about it
 
 | Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
-| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
@@ -107,5 +107,5 @@ View the [development page](docs/Developing.md) to run this project locally.
 
 ## Got feedback?
 
-[Open an issue](https://github.com/checkr/embeds-reference-integration/issues)
+[Open an issue](https://github.com/checkr/oauth-reference-integration/issues)
 in this repository to ask a question or give us feedback.

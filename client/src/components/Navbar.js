@@ -6,7 +6,7 @@ export default function NavBar({createToast, children, account}) {
   const dropDownItems = {
     Documentation: () =>
       window.open(
-        'https://github.com/checkr/embeds-reference-integration#readme',
+        'https://github.com/checkr/oauth-reference-integration#readme',
       ),
     Disconnect: async () => {
       const options = {
