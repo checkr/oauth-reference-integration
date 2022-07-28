@@ -267,11 +267,11 @@ oauthRouter.post('/api/checkr/deauthorize', async (req, res) => {
   // token now, our user's Checkr account will be in a bad state to receive
   // this webhook.
   const db = await database()
-  const accountToDisconnect = await findAccountWithMatchingToken(
+  const accountToDeauthorize = await findAccountWithMatchingToken(
     db.data.accounts,
     plaintextToken,
   )
-  accountToDisconnect.deauthorized = true
+  accountToDeauthorize.checkrAccount = {state: 'disconnected'}
   await db.write()
   res.status(204).end()
 })
