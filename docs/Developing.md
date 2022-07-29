@@ -12,13 +12,9 @@ yarn setup
 
 ## 3. Run tests locally:
 
-### Backend tests:
-
 ```shell
 yarn test:backend
 ```
-
-### Watch frontend tests:
 
 ```shell
 yarn test:frontend
