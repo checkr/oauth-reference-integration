@@ -1,16 +1,16 @@
 # Development Setup
 
-## 1. Install all dependencies:
+### Install all dependencies:
 
 ```shell
 yarn setup
 ```
 
-## 2. Setup Environment Variables
+### Setup Environment Variables
 
 Create an `.env` file and copy the variables from `.env.example`
 
-## 3. Run tests locally:
+### Run tests locally:
 
 ```shell
 yarn test:backend
@@ -20,7 +20,7 @@ yarn test:backend
 yarn test:frontend
 ```
 
-## 3. Run it locally:
+### Run it locally:
 
 This implementation uses the free version of [ngrok](https://ngrok.com/) to
 enable testing of your integration in your localhost environment. When starting
