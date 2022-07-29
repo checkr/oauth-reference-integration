@@ -104,7 +104,11 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   // shows them that we are waiting for Checkr to credential their account.
   // Their account must be credentialed before they can make any background
   // check requests with the stored OAuth access token.
-  res.status(200).redirect('/')
+  if (process.env.NODE_ENV === 'production') {
+    res.status(200).redirect('/')
+  } else {
+    res.status(200).redirect('http://localhost:3000/')
+  }
 
   // Be sure to register this endpoint as the OAuth Redirect URL in your
   // [partner application
@@ -146,6 +150,7 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
   }
 
   const db = await database()
+  console.log('Handling webhook: ', req.body.type)
   // Use the webhook payload's ```type``` property to determine what to do with
   // the event.
   switch (req.body.type) {
