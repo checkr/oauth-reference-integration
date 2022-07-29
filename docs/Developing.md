@@ -8,7 +8,7 @@ yarn setup
 
 ## 2. Setup Environment Variables
 
-> Create an `.env` file and copy the variables from `.env.example`
+Create an `.env` file and copy the variables from `.env.example`
 
 ## 3. Run tests locally:
 
