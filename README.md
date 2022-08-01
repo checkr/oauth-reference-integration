@@ -54,14 +54,14 @@ your customers. This described in more detail in our
 | Component                                                                                                                                      | Responsibility                      | Code walkthrough                                                                     |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------ |
 | [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectLink.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
   autonumber
 
   rect rgb(240, 190, 80)
-    Note right of App Frontend: CheckrConnectButton pressed
+    Note right of App Frontend: CheckrConnectLink pressed
     Note right of Partner customer signup flow: Checkr Account created
 
     App Frontend->>+Partner customer signup flow: Navigate to Checkr Sign-Up Flow URL
