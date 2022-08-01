@@ -64,7 +64,7 @@ export default function NavBar({createToast, children, account}) {
                 .filter(
                   ([description, handleClick]) =>
                     !(
-                      disconnectedCheckrAccount && description === 'Deauthorize'
+                      disconnectedCheckrAccount && description === 'Disconnect'
                     ),
                 )
                 .map(([description, handleClick]) => (
