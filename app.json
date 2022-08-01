@@ -1,5 +1,5 @@
 {
-  "name": "Checkr Embeds Reference Integration",
+  "name": "Checkr OAuth Reference Integration",
   "description": "Sample application demonstrating an end to end Checkr integration",
   "buildpacks": [
     {
@@ -44,5 +44,5 @@
     }
   },
   "keywords": ["node", "express", "static"],
-  "repository": "https://github.com/checkr/embeds-reference-integration"
+  "repository": "https://github.com/checkr/oauth-reference-integration"
 }

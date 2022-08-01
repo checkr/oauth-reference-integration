@@ -5,8 +5,8 @@
     
     * Click the button displayed on the page to go through Checkr's sign-up flow 
       to connect an Account to Checkr's ecosystem. 
-    * Once finished, you will be redirected to the backend Oauth route with a <code> 
-      and <state> parameter. The backend will complete the Oauth process with Checkr
+    * Once finished, you will be redirected to the backend OAuth route with a <code> 
+      and <state> parameter. The backend will complete the OAuth process with Checkr
       and create an <access_token> to validate requests. Once this token is saved
       in the database, you will be redirected back to this React application.
 

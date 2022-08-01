@@ -16,7 +16,7 @@ export default function CheckrConnectButton({accountId}) {
     // application settings. Your partner application settings can be found in
     // https://dashboard.checkrhq-staging.net/account/applications
     const signupFlowURL = new URL(
-      `https://partners.checkrhq-staging.net/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID}/signup`,
+      `${process.env.REACT_APP_CHECKR_PARTNER_URL}/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID}/signup`,
     )
 
     // Define a state variable that will help you identify which account is

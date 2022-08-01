@@ -7,18 +7,18 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "name": "embeds-reference-integration",
+  "name": "oauth-reference-integration",
   "type": "module",
   "scripts": {
     "dev:frontend": "env-cmd -f ../.env react-scripts start",
-    "build": "env-cmd -f ../.env react-scripts build",
+    "build": "env-cmd --silent -f ../.env react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "test:ci": "cross-env CI=true react-scripts test --testPathIgnorePatterns=src/__tests__/testSupport",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8000/",
   "dependencies": {
-    "@checkr/web-sdk": "^0.0.26",
+    "@checkr/web-sdk": "^0.0.27",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

@@ -1,6 +1,6 @@
 # Reference Integration
 
-![Build status](https://github.com/checkr/embeds-reference-integration/actions/workflows/main.js.yml/badge.svg?branch=main)
+![Build status](https://github.com/checkr/oauth-reference-integration/actions/workflows/main.js.yml/badge.svg?branch=main)
 
 This is a sample application demonstrating an end to end Checkr integration. It
 outlines best practices and patterns we see Checkr integrations adopt, and will
@@ -25,7 +25,7 @@ use-cases.
 
 - [Live Sandbox](#live-sandbox)
 - [Connecting customers](#connecting-customers)
-- [Using Embeds to order background checks](#using-embeds)
+- [Using Embeds to order background checks](#using-embeds-to-order-background-checks)
 - [Resources](#resources)
 - [Running it locally](#running-it-locally)
 - [Got feedback?](#got-feedback)
@@ -33,7 +33,7 @@ use-cases.
 ## Live sandbox
 
 An instance of this application is hosted at
-[checkr-embeds-integration.herokuapp.com](https://checkr-embeds-integration.herokuapp.com).
+[checkr-oauth-integration.herokuapp.com](https://checkr-oauth-integration.herokuapp.com).
 It is connected to a demo staging Checkr account which does not run real
 background checks.
 
@@ -51,22 +51,41 @@ your customers. This described in more detail in our
 
 #### Application components
 
-| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
-| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
+| Component                                                                                                                                      | Responsibility                      | Code walkthrough                                                                     |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------ |
+| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
+| [CheckrConnectButton.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
 
 ```mermaid
 sequenceDiagram
-    participant oauth.js
-    participant iframe
-    participant viewscreen
-    oauth.js->>iframe: loads html w/ iframe url
-    iframe->>viewscreen: request template
-    viewscreen->>iframe: html & javascript
-    iframe->>oauth.js: iframe ready
-    oauth.js->>iframe: set mermaid data on iframe
-    iframe->>iframe: render mermaid
+  autonumber
+
+  rect rgb(240, 190, 80)
+    Note right of App Frontend: CheckrConnectButton pressed
+    Note right of Partner customer signup flow: Checkr Account created
+
+    App Frontend->>+Partner customer signup flow: Navigate to Checkr Sign-Up Flow URL
+    Partner customer signup flow->>+oauth.js: Navigate to redirect URL
+    oauth.js->>+Checkr: Request OAuth Access token
+    Checkr->>+oauth.js: Respond with OAuth Access token
+    oauth.js->>+App Database: Persist and encrypt OAuth Access token in App Database
+    oauth.js->>+App Frontend: Redirect to App Frontend
+  end
+  rect rgb(150, 180, 100)
+    Note right of App Frontend: Account is uncredentialed
+    Checkr->>+oauth.js: Send account.credentialed webhook
+    oauth.js->>+App Database: Update Checkr account state
+    Note right of App Frontend: Account is credentialed
+  end
+  rect rgb(100, 100, 250)
+    App Frontend->>+Checkr: POST /oauth/deauthorize
+    Checkr->>+oauth.js: HTTP 200
+    Note right of Checkr: Token has been deauthorized
+    oauth.js->>+App Frontend: HTTP 204
+    Checkr->>+oauth.js: Send token.deauthorized webhook
+    oauth.js->>+App Database: Delete access token from database
+    Note right of App Frontend: Account is disconnected
+  end
 ```
 
 ## Using Embeds to order background checks
@@ -77,23 +96,9 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                                                       | Responsibility                      | Code walkthrough                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------|
-| [oauth.js](https://github.com/checkr/embeds-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectButton.js](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js) | Link to connect account with Checkr | [walkthrough](https://checkr-embeds-integration.herokuapp.com/docs/routes/oauth.html) |
-
-```mermaid
-sequenceDiagram
-    participant oauth.js
-    participant iframe
-    participant viewscreen
-    oauth.js->>iframe: loads html w/ iframe url
-    iframe->>viewscreen: request template
-    viewscreen->>iframe: html & javascript
-    iframe->>oauth.js: iframe ready
-    oauth.js->>iframe: set mermaid data on iframe
-    iframe->>iframe: render mermaid
-```
+| Component                                                                                                     | Responsibility                                 | Code walkthrough                                                                              | Diagram                                                                |
+| ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
 
 ## Resources
 
@@ -107,5 +112,5 @@ View the [development page](docs/Developing.md) to run this project locally.
 
 ## Got feedback?
 
-[Open an issue](https://github.com/checkr/embeds-reference-integration/issues)
-in this repository to ask a question or give us feedback.
+[Open an issue](https://github.com/checkr/oauth-reference-integration/issues) in
+this repository to ask a question or give us feedback.

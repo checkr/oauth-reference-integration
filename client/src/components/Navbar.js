@@ -2,11 +2,12 @@ import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import {toastSuccess, toastFailure} from '../helpers/toasts.js'
 
 export default function NavBar({createToast, children, account}) {
-  const disconnectedCheckrAccount = account && !account.checkrAccount
+  const disconnectedCheckrAccount =
+    account && account.checkrAccount.state === 'disconnected'
   const dropDownItems = {
     Documentation: () =>
       window.open(
-        'https://github.com/checkr/embeds-reference-integration#readme',
+        'https://github.com/checkr/oauth-reference-integration#readme',
       ),
     Disconnect: async () => {
       const options = {
@@ -63,7 +64,7 @@ export default function NavBar({createToast, children, account}) {
                 .filter(
                   ([description, handleClick]) =>
                     !(
-                      disconnectedCheckrAccount && description === 'Disconnect'
+                      disconnectedCheckrAccount && description === 'Deauthorize'
                     ),
                 )
                 .map(([description, handleClick]) => (
