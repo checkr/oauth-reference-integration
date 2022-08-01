@@ -25,8 +25,9 @@ yarn test:frontend
 This implementation uses the free version of [ngrok](https://ngrok.com/) to
 enable testing of your integration in your localhost environment. When starting
 this application, your `OAuth redirect URL` and `OAuth webhook URL` can be found
-in the console. Update your application settings on the Checkr Dashboard with
-the printed values.
+in the console. Update your
+[application settings](https://dashboard.checkrhq-staging.net/account/applications)
+on the Checkr Dashboard with the printed values.
 
 ```shell
 yarn dev
