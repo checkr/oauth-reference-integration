@@ -2,22 +2,24 @@
 // Embeds](https://docs.checkr.com/embeds/) to make background check requests.
 // These integrations will use the
 // [@checkr/web-sdk](https://www.npmjs.com/package/@checkr/web-sdk) to setup UI
-// components, and these components require Checkr session tokens to operate.
+// components, and these components require session tokens to operate.
 //
 // This code walkthrough describes how to setup an endpoint to request these
-// Checkr Embeds session tokens.
+// Checkr Embeds session tokens. It will provide a working code example for the
+// Embeds [Add Authentication
+// docs](https://docs.checkr.com/embeds/#section/Getting-Started/Add-authentication).
 
 import express from 'express'
 import fetch from 'node-fetch'
 import database from '../db.js'
-import jwt from 'jsonwebtoken'
+import {authenticateAndAuthorizeUser} from '../authenticateUser.js'
 import bearerToken from 'express-bearer-token'
 import {parseJSON} from '../helpers/index.js'
 import {decrypt} from '../encryption.js'
 
 const sessionTokensRouter = express.Router().use(bearerToken())
 
-// Session Token URL
+// Embeds Session Token Authentication
 // ---------------
 
 // When your Checkr Embeds components initializes, they will call this private
@@ -25,41 +27,34 @@ const sessionTokensRouter = express.Router().use(bearerToken())
 // endpoint must be authenticated and authorized before a session token can be
 // created.</mark>
 sessionTokensRouter.post('/api/embeds-session-tokens', async (req, res) => {
-  let validToken
-  // In this case, since we use JWTs to secure requests to
-  // ```api/embeds-session-token```, we first verify if the token signature is
-  // valid and the JWT is not expired.
+  let userAccountID
   try {
-    validToken = jwt.verify(req.token, process.env.JWT_HMAC_SECRET)
-  } catch {
+    userAccountID = authenticateAndAuthorizeUser(req.token)
+  } catch (error) {
     res.status(401).send({
-      errors: ['authentication failed'],
+      errors: [error],
     })
     return
-  }
-  // Then we check that the token has the permissions required by this
-  // endpoint. Your implementation may require more or different checks.
-  if (
-    !validToken.authorizations.permissions.includes('checkr_background_checks')
-  ) {
-    res.status(403).send({
-      errors: ['authorization failed'],
-    })
   }
 
   const db = await database()
   // Next, we use the user information in the valid JWT to find their Checkr
   // access token.
-  const account = db.data.find(a => a.id === validToken.sub)
-  const oauthToken = await decrypt(account.checkrAccount.accessToken)
+  const account = db.data.accounts.find(a => a.id === userAccountID)
+  const accessToken = await decrypt(account.checkrAccount.accessToken)
 
-  // #### Request a WebSDK session token
+  // #### Request an embeds session token
+  //
   // To request a session token from Checkr we assemble the required variables here:
   // - ```CHECKR_API_URL``` which is ```https://api.checkr-staging.com``` in the testing environment and ```https://api.checkr.com``` in production
   // - ```basicAuthUsername``` This request is an ```HTTP POST``` that uses
   //   basic authentication. The basic auth username is the user's access
   //   token and the password is blank.
-  const basicAuthUsername = Buffer.from(`${oauthToken}`).toString('base64')
+  //
+  //   For more information about this request, please refer to the [Embeds Add
+  //   Authentication
+  //   docs](https://docs.checkr.com/embeds/#new-invitation-auth-2-request).
+  const basicAuthUsername = Buffer.from(`${accessToken}`).toString('base64')
   const response = await fetch(
     `${process.env.CHECKR_API_URL}/v1/web_sdk/session_tokens`,
     {
@@ -72,7 +67,10 @@ sessionTokensRouter.post('/api/embeds-session-tokens', async (req, res) => {
         // If you are a partner requesting a session token on behalf of your
         // customer, you only need the scopes property in your request body to
         // Checkr. If you are a direct customer of checkr, you will need to
-        // provide another key in this request body object: ```"direct": true```.
+        // provide another key in this request body object: ```"direct":
+        // true```. For more information on direct customer requests, refer to
+        // the Direct Customer Request code section in [Embeds Add Authentication
+        // docs](https://docs.checkr.com/embeds/#section/Getting-Started/Add-authentication).
         scopes: ['order'],
       }),
     },

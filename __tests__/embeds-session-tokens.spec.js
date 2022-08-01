@@ -4,6 +4,7 @@ import embedsSessionTokensRouter from '../routes/embeds-session-tokens'
 import {jest} from '@jest/globals'
 import jwt from 'jsonwebtoken'
 import mockBackend from '../client/src/__tests__/testSupport/helpers/mockBackend.js'
+import {createAccountWithEncryptedToken} from './testSupport/helpers/accountHelper.js'
 
 describe('Session token route', function () {
   const api = request(express().use(embedsSessionTokensRouter))
@@ -20,7 +21,17 @@ describe('Session token route', function () {
   afterAll(() => backend.server.close())
 
   it('responds with a 200 when given appropriate credentials', async () => {
-    verify.mockImplementation(() => true)
+    const account = await createAccountWithEncryptedToken()
+    verify.mockImplementation(() => {
+      return {
+        sub: account.id,
+        name: 'Test Customer',
+        authorizations: {
+          roles: ['user'],
+          permissions: ['checkr_background_checks'],
+        },
+      }
+    })
     const {statusCode, text} = await api.post('/api/embeds-session-tokens')
 
     expect(statusCode).toBe(200)
@@ -28,7 +39,9 @@ describe('Session token route', function () {
   })
 
   it('responds with a 401 when given inappropriate credentials', async () => {
-    verify.mockImplementation(() => false)
+    verify.mockImplementation(() => {
+      throw Error('JWT invalid')
+    })
     const {statusCode} = await api.post('/api/embeds-session-tokens')
 
     expect(statusCode).toBe(401)
