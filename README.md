@@ -60,7 +60,6 @@ your customers. This described in more detail in our
 sequenceDiagram
   autonumber
 
-  rect rgb(240, 190, 80)
     Note right of App Frontend: CheckrConnectButton pressed
     Note right of Partner customer signup flow: Checkr Account created
 
@@ -70,14 +69,12 @@ sequenceDiagram
     Checkr->>+oauth.js: Respond with OAuth Access token
     oauth.js->>+App Database: Persist and encrypt OAuth Access token in App Database
     oauth.js->>+App Frontend: Redirect to App Frontend
-  end
-  rect rgb(150, 180, 100)
+
     Note right of App Frontend: Account is uncredentialed
     Checkr->>+oauth.js: Send account.credentialed webhook
     oauth.js->>+App Database: Update Checkr account state
     Note right of App Frontend: Account is credentialed
-  end
-  rect rgb(100, 100, 250)
+
     App Frontend->>+Checkr: POST /oauth/deauthorize
     Checkr->>+oauth.js: HTTP 200
     Note right of Checkr: Token has been deauthorized
@@ -85,7 +82,7 @@ sequenceDiagram
     Checkr->>+oauth.js: Send token.deauthorized webhook
     oauth.js->>+App Database: Delete access token from database
     Note right of App Frontend: Account is disconnected
-  end
+
 ```
 
 ## Using Embeds to order background checks
