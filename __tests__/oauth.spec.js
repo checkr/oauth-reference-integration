@@ -8,7 +8,6 @@ import {
   findAccountWithId,
 } from './testSupport/helpers/accountHelper.js'
 import {getValidSignature} from './testSupport/helpers/webhooksHelper.js'
-import {clearDB} from './testSupport/helpers/dbHelper.js'
 import {encrypt, decrypt} from '../encryption.js'
 import testSeedData from './testSupport/testSeedData.js'
 import mockBackend from '../client/src/__tests__/testSupport/helpers/mockBackend.js'
@@ -18,7 +17,6 @@ describe('/api/checkr', () => {
   const oauthAPI = request(express().use(express.json()).use(oauthRouter))
   const oauthAPIMock = new mockBackend()
 
-  beforeEach(async () => await clearDB())
   beforeAll(() => oauthAPIMock.server.listen({onUnhandledRequest: 'bypass'}))
   afterAll(() => oauthAPIMock.server.close())
 

@@ -2,14 +2,11 @@ import express from 'express'
 import request from 'supertest'
 import candidatesRouter from '../routes/candidates.js'
 import {faker} from '@faker-js/faker'
-import {clearDB} from './testSupport/helpers/dbHelper.js'
 
 describe('/api/candidates', () => {
   const candidatesApi = request(
     express().use(express.json()).use(candidatesRouter),
   )
-
-  beforeEach(async () => await clearDB())
 
   it('should GET candidates', async () => {
     const response = await candidatesApi.get(`/api/candidates`)
