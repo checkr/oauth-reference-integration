@@ -28,7 +28,7 @@ import {useCustomerAccount} from '../hooks/useCustomerAccount.js'
 import Navbar from './Navbar.js'
 import Loading from './Loading.js'
 import Candidates from './candidates/Candidates.js'
-import CheckrConnectButton from './account/CheckrConnectButton.js'
+import CheckrConnectLink from './account/CheckrConnectLink.js'
 import CheckrAccountStatus from './account/CheckrAccountStatus.js'
 import Notifications from './Notifications.js'
 
@@ -63,7 +63,7 @@ export default function App() {
               textContent="Connect your Acme HR account with Checkr to run background 
               checks."
             >
-              <CheckrConnectButton accountId={account.data.id} />
+              <CheckrConnectLink customerAccountID={account.data.id} />
             </CheckrAccountStatus>
           )}
           {account.data &&

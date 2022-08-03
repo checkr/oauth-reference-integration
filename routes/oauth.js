@@ -25,7 +25,7 @@ const oauthRouter = express.Router()
 
 // When your user wishes to sign-up or connect their existing account with
 // Checkr. They will click your
-// [CheckrConnectLink](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js#L18)
+// [CheckrConnectLink](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js#L18)
 // and follow the sign-up flow instructions. At the end of this flow, Checkr
 // will redirect your user to this endpoint.
 oauthRouter.get('/api/checkr/oauth', async (req, res) => {
@@ -34,7 +34,7 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   //   Checkr. This is subsequently used to acquire an access token for the
   //   user's Checkr account.
   // - a ```state``` variable which you set when creating the
-  //   [CheckrConnectLink](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectButton.js#L18).
+  //   [CheckrConnectLink](https://github.com/checkr/embeds-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js#L18).
   //   We recommend that you set the ```state``` to a value from your product
   //   that you will associate this Checkr access token with. For example, in
   //   this scenario each customer account will have a Checkr access token associated with
