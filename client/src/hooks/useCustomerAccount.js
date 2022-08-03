@@ -9,11 +9,9 @@ export function useCustomerAccount() {
     async () => {
       const response = await fetch('/api/accounts')
       const jsonBody = await parseJSON(response)
-
       if (!response.ok) {
         throw jsonBody
       }
-      if (jsonBody.length == 0) return null
 
       // This reference implementation only has one account.
       const account = jsonBody[0]
