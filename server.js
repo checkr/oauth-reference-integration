@@ -5,7 +5,7 @@ import ngrok from 'ngrok'
 import express from 'express'
 import candidatesRouter from './routes/candidates.js'
 import accountsRouter from './routes/accounts.js'
-import sessionTokensRouter from './routes/session-tokens.js'
+import embedsSessionTokensRouter from './routes/embeds-session-tokens.js'
 import oauthRouter from './routes/oauth.js'
 
 const port = process.env.PORT || 8000
@@ -16,7 +16,7 @@ const app = express()
   .use(candidatesRouter)
   .use(accountsRouter)
   .use(oauthRouter)
-  .use(sessionTokensRouter)
+  .use(embedsSessionTokensRouter)
 
 if (process.env.NODE_ENV === 'production') {
   const reactBuild = './client/build'

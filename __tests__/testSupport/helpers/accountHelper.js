@@ -47,7 +47,7 @@ const findAccountWithCheckrId = async id => {
   )
 }
 
-const createAccountWithCheckrAccessToken = async encryptedToken => {
+const createAccountWithEncryptedToken = async () => {
   const db = await database()
   const now = new Date()
   const newAccount = {
@@ -57,7 +57,7 @@ const createAccountWithCheckrAccessToken = async encryptedToken => {
     updatedAt: now,
     checkrAccount: {
       id: faker.lorem.slug(),
-      accessToken: encryptedToken,
+      accessToken: await encrypt(faker.lorem.slug()),
       state: 'credentialed',
     },
   }
@@ -68,7 +68,7 @@ const createAccountWithCheckrAccessToken = async encryptedToken => {
 
 export {
   createAccountWithCheckrAccountId,
-  createAccountWithCheckrAccessToken,
+  createAccountWithEncryptedToken,
   createAccountWithName,
   findAccountWithCheckrId,
   findAccountWithId,

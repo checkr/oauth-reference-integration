@@ -15,7 +15,7 @@
     "dev:backend": "node server.js",
     "dev:docs": "watch 'yarn docs' ./routes",
     "dev:frontend": "cd client/ && yarn dev:frontend",
-    "docs": "docco routes/oauth.js routes/session-tokens.js client/src/components/account/CheckrConnectButton.js -o client/public/docs",
+    "docs": "docco routes/oauth.js routes/embeds-session-tokens.js client/src/components/account/CheckrConnectLink.js -o client/public/docs",
     "test:backend": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "test:frontend": "cd client/ && yarn test",
     "test:frontend:ci": "cd client/ && yarn test:ci",

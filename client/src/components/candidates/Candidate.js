@@ -43,11 +43,13 @@ export default function Candidate({
 }) {
   const defaultProps = {
     externalCandidateId: id,
-    sessionTokenPath: '/api/session-tokens',
+    sessionTokenPath: '/api/embeds-session-tokens',
     sessionTokenRequestHeaders: () => ({
-      Authorization: `Bearer ${localStorage.getItem(
-        'reference-integration-session-token',
-      )}`,
+      // Warning: storing a JWT token in local storage is not secure. It is
+      // done here to simplify implementation. This code base is only
+      // meant to show how to use Checkr's API and SDKs. It does not cover all
+      // best practices for securing your system.
+      Authorization: `Bearer ${localStorage.getItem('userJWT')}`,
     }),
     styles,
   }

@@ -9,18 +9,20 @@ export function useCustomerAccount() {
     async () => {
       const response = await fetch('/api/accounts')
       const jsonBody = await parseJSON(response)
-
       if (!response.ok) {
         throw jsonBody
       }
 
-      localStorage.setItem(
-        'reference-integration-session-token',
-        jsonBody[0]['reference-integration-session-token'],
-      )
+      // This reference implementation only has one account.
+      const account = jsonBody[0]
 
-      if (jsonBody.length > 0) return jsonBody[0]
-      else return null
+      // Warning: storing a JWT token in local storage is not secure. It is
+      // done here to simplify implementation. This code base is only
+      // meant to show how to use Checkr's API and SDKs. It does not cover all
+      // best practices for securing your system.
+      localStorage.setItem('userJWT', account['userJWT'])
+
+      return account
     },
     {
       refetchInterval: 5000,

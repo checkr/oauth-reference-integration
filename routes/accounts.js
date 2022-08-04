@@ -2,6 +2,7 @@ import express from 'express'
 import database from '../db.js'
 import {v4 as uuidv4} from 'uuid'
 import jwt from 'jsonwebtoken'
+import {hmacKeygen} from '../encryption.js'
 
 const accountsRouter = express.Router()
 
@@ -9,9 +10,23 @@ accountsRouter.get('/api/accounts', async (_, res) => {
   const db = await database()
   const accounts = db.data.accounts
 
-  accounts[0]['reference-integration-session-token'] = jwt.sign(
-    'some-token',
-    'supersecret',
+  process.env.JWT_HMAC_SECRET = await hmacKeygen()
+
+  // Warning: We simplify the creation of this token here because this
+  // implementation does not have a login system. In your system, this token
+  // should be created when the user logs in.
+  accounts[0]['userJWT'] = jwt.sign(
+    {
+      sub: 'ce04e0a2-ecec-11ec-b7ed-f33adcba9538',
+      name: 'Our Favorite Customer',
+      authorizations: {
+        roles: ['user'],
+        permissions: ['checkr_background_checks'],
+      },
+      exp: 1958900863,
+      iat: 1516239022,
+    },
+    process.env.JWT_HMAC_SECRET,
   )
 
   res.status(200).json(accounts)
