@@ -3,12 +3,9 @@ import request from 'supertest'
 import accountsRouter from '../routes/accounts.js'
 import {faker} from '@faker-js/faker'
 import {createAccountWithName} from './testSupport/helpers/accountHelper.js'
-import {clearDB} from './testSupport/helpers/dbHelper.js'
 
 describe('/api/accounts', () => {
   const accountsApi = request(express().use(express.json()).use(accountsRouter))
-
-  beforeEach(async () => await clearDB())
 
   it('should GET accounts', async () => {
     const existingID = 'ce04e0a2-ecec-11ec-b7ed-f33adcba9538'

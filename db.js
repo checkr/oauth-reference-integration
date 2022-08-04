@@ -6,10 +6,8 @@ import S3Adapter from '@sadorlovsky/lowdb-s3'
 const testDB = async () => {
   const db = new Low(new Memory())
   await db.read()
-  if (!db.data) {
-    db.data = testSeedData
-    await db.write()
-  }
+  db.data = testSeedData
+  await db.write()
   return db
 }
 
