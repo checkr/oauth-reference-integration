@@ -1,5 +1,4 @@
 import sodium from 'libsodium-wrappers'
-import jwt from 'jsonwebtoken'
 
 const key = process.env.ENCRYPTION_SECRET_KEY
 
@@ -12,16 +11,23 @@ const encrypt = async plaintext => {
   return {ciphertext: ciphertext.toString('hex'), nonce: nonce.toString('hex')}
 }
 
-const decrypt = async ({ciphertext, nonce}) => {
-  await sodium.ready
-  let decrypted = Buffer.from(
-    sodium.crypto_secretbox_open_easy(
-      Buffer.from(ciphertext, 'hex'),
-      Buffer.from(nonce, 'hex'),
-      Buffer.from(key, 'hex'),
-    ),
-  )
-  return sodium.to_string(decrypted)
+const decrypt = async (accessToken = {}) => {
+  const {ciphertext, nonce} = accessToken
+
+  try {
+    await sodium.ready
+    const decrypted = Buffer.from(
+      sodium.crypto_secretbox_open_easy(
+        Buffer.from(ciphertext, 'hex'),
+        Buffer.from(nonce, 'hex'),
+        Buffer.from(key, 'hex'),
+      ),
+    )
+    return sodium.to_string(decrypted)
+  } catch (e) {
+    console.error(e)
+    return null
+  }
 }
 
 const encryptionKeygen = async () => {

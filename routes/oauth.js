@@ -14,6 +14,7 @@
 import express from 'express'
 import database from '../db.js'
 import fetch from 'node-fetch'
+import chalk from 'chalk'
 import {parseJSON, findAccountWithMatchingToken} from '../helpers/index.js'
 import {encrypt, decrypt} from '../encryption.js'
 const {createHmac, timingSafeEqual} = await import('node:crypto')
@@ -150,7 +151,10 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
   }
 
   const db = await database()
-  console.log('Handling webhook: ', req.body.type)
+  console.log(
+    chalk.black.bgGreen(' Handling webhook '),
+    chalk.black.bgYellow(` ${req.body.type} `),
+  )
   // Use the webhook payload's ```type``` property to determine what to do with
   // the event.
   switch (req.body.type) {
@@ -247,6 +251,13 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
         db.data.accounts,
         checkrAccessToken,
       )
+
+      if (!accountToDisconnect) {
+        res.status(404).send({
+          errors: ['cannot find account with matching checkr access token'],
+        })
+        return
+      }
 
       // Here, we mark the Checkr account as ```disconnected```. If your user
       // decides to reconnect your integration with their Checkr account, the

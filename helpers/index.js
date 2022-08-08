@@ -1,4 +1,6 @@
 import {decrypt} from '../encryption.js'
+import {Low, JSONFile} from 'lowdb'
+import seedData from '../seedData.js'
 
 const parseJSON = async response => {
   const text = await response.text()
@@ -28,4 +30,11 @@ const findAccountWithMatchingToken = async (
   return null
 }
 
-export {parseJSON, findAccountWithMatchingToken}
+const syncDB = async () => {
+  const db = new Low(new JSONFile('localdb.json'))
+  await db.read()
+  db.data = seedData
+  await db.write()
+}
+
+export {parseJSON, findAccountWithMatchingToken, syncDB}
