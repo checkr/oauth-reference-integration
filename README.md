@@ -60,7 +60,6 @@ your customers. This described in more detail in our
 sequenceDiagram
   autonumber
 
-  rect rgb(240, 190, 80)
     Note right of App Frontend: CheckrConnectLink pressed
     Note right of Partner customer signup flow: Checkr Account created
 
