@@ -10,16 +10,6 @@ yarn setup
 
 Create an `.env` file and copy the variables from `.env.example`
 
-### Run tests locally:
-
-```shell
-yarn test:backend
-```
-
-```shell
-yarn test:frontend
-```
-
 ### Run it locally:
 
 Locally, this project uses the free version of [ngrok](https://ngrok.com/) to
@@ -32,10 +22,25 @@ To start the application run the following command
 yarn dev
 ```
 
-Your `OAuth redirect URL` and `OAuth webhook URL` will be logged in the console.
-Update your
+Your personalized `OAuth redirect URL` and `OAuth webhook URL` will be logged in
+the console. Update your
 [application settings](https://dashboard.checkrhq-staging.net/account/applications)
 on the Checkr Dashboard with the logged values.
+
+```
+OAuth webhook URL  https://90f1-34-236-51-55.ngrok.io/api/checkr/webhooks
+OAuth redirect URL  https://90f1-34-236-51-55.ngrok.io/api/checkr/oauth
+```
+
+### Run tests:
+
+```shell
+yarn test:backend
+```
+
+```shell
+yarn test:frontend
+```
 
 # VS Code Recommended Settings
 
