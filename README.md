@@ -37,7 +37,7 @@ An instance of this application is hosted at
 It is connected to a demo staging Checkr account which does not run real
 background checks.
 
-You can also deploy this using your own Heroku account and connect it your
+You can also deploy this using your own Heroku account, and connect it to your
 Checkr account.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
@@ -95,7 +95,7 @@ order background checks and view results. Read more about it
 
 | Component                                                                                                                   | Responsibility                                 | Code walkthrough                                                                                     | Diagram                                                                |
 | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [embeds-session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
+| [embeds-session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/#section/Getting-Started/Add-authentication) |
 
 ## Resources
 
