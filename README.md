@@ -93,9 +93,9 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                            | Responsibility                                 | Code walkthrough                                                                                     | Diagram                                                                |
-| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
+| Component                                                                                                                   | Responsibility                                 | Code walkthrough                                                                                     | Diagram                                                                |
+| --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [embeds-session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
 
 ## Resources
 
