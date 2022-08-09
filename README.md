@@ -23,26 +23,14 @@ use-cases.
 
 # Contents
 
+- [Use case: Connecting customers](#use-case-connecting-customers)
+- [Use case: Using Embeds to order background checks](#use-case-using-embeds-to-order-background-checks)
 - [Live Sandbox](#live-sandbox)
-- [Connecting customers](#connecting-customers)
-- [Using Embeds to order background checks](#using-embeds-to-order-background-checks)
 - [Resources](#resources)
 - [Running it locally](#running-it-locally)
 - [Got feedback?](#got-feedback)
 
-## Live sandbox
-
-An instance of this application is hosted at
-[checkr-oauth-integration.herokuapp.com](https://checkr-oauth-integration.herokuapp.com).
-It is connected to a demo staging Checkr account which does not run real
-background checks.
-
-You can also deploy this using your own Heroku account, and connect it to your
-Checkr account.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-## Connecting customers
+## Use case: Connecting customers
 
 With Checkr OAuth, your customers can easily connect their Checkr account with
 your product. It gives your product the ability to make API calls on behalf of
@@ -85,7 +73,7 @@ sequenceDiagram
 
 ```
 
-## Using Embeds to order background checks
+## Use case: Using Embeds to order background checks
 
 Embeds provide Javascript and React components to quickly build an experience to
 order background checks and view results. Read more about it
@@ -96,6 +84,18 @@ order background checks and view results. Read more about it
 | Component                                                                                                                   | Responsibility                                 | Code walkthrough                                                                                     | Diagram                                                                |
 | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | [embeds-session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/#section/Getting-Started/Add-authentication) |
+
+## Live sandbox
+
+An instance of this application is hosted at
+[checkr-oauth-integration.herokuapp.com](https://checkr-oauth-integration.herokuapp.com).
+It is connected to a demo staging Checkr account which does not run real
+background checks.
+
+You can also deploy this using your own Heroku account, and connect it to your
+Checkr account.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Resources
 
