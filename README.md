@@ -51,10 +51,10 @@ your customers. This described in more detail in our
 
 #### Application components
 
-| Component                                                                                                                                      | Responsibility                      | Code walkthrough                                                                     |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------ |
-| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                    | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
-| [CheckrConnectLink.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html) |
+| Component                                                                                                                                  | Responsibility                      | Code walkthrough                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html)              |
+| [CheckrConnectLink.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/account/CheckrConnectLink.html) |
 
 ```mermaid
 sequenceDiagram
@@ -93,9 +93,9 @@ order background checks and view results. Read more about it
 
 #### Application components
 
-| Component                                                                                                     | Responsibility                                 | Code walkthrough                                                                              | Diagram                                                                |
-| ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
+| Component                                                                                                            | Responsibility                                 | Code walkthrough                                                                                     | Diagram                                                                |
+| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/images/authentication-v3.png) |
 
 ## Resources
 
