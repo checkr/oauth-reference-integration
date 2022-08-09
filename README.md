@@ -9,7 +9,7 @@ help you develop a Checkr certified integration. It focuses on two use-cases:
 - How to use the
   [Checkr-Hosted Signup flow](https://docs.checkr.com/partners/#section/Getting-Started/Connect-your-customers-to-Checkr)
   to connect your customers to Checkr.
-- How to order background checks and report results via
+- How to order background checks and report results using
   [Checkr Embeds](https://docs.checkr.com/embeds).
 
 You can refer to this application if you are building either one or both
