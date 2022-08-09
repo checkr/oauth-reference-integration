@@ -22,16 +22,20 @@ yarn test:frontend
 
 ### Run it locally:
 
-This implementation uses the free version of [ngrok](https://ngrok.com/) to
-enable testing of your integration in your localhost environment. When starting
-this application, your `OAuth redirect URL` and `OAuth webhook URL` can be found
-in the console. Update your
-[application settings](https://dashboard.checkrhq-staging.net/account/applications)
-on the Checkr Dashboard with the printed values.
+Locally, this project uses the free version of [ngrok](https://ngrok.com/) to
+enable redirects and webhook processing. Sign up for a free account and go
+through first time [setup](https://dashboard.ngrok.com/get-started/setup).
+
+To start the application run the following command
 
 ```shell
 yarn dev
 ```
+
+Your `OAuth redirect URL` and `OAuth webhook URL` will be logged in the console.
+Update your
+[application settings](https://dashboard.checkrhq-staging.net/account/applications)
+on the Checkr Dashboard with the logged values.
 
 # VS Code Recommended Settings
 
