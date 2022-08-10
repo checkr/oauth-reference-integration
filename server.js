@@ -3,6 +3,7 @@ import chalk from 'chalk'
 import morgan from 'morgan'
 import ngrok from 'ngrok'
 import express from 'express'
+import {syncDB} from './helpers/index.js'
 import candidatesRouter from './routes/candidates.js'
 import accountsRouter from './routes/accounts.js'
 import embedsSessionTokensRouter from './routes/embeds-session-tokens.js'
@@ -38,6 +39,7 @@ if (process.env.NODE_ENV === 'production') {
   })()
 }
 
+await syncDB()
 app.listen(port)
 console.log(
   chalk.black.bgWhite(' Private API URL '),

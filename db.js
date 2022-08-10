@@ -14,9 +14,10 @@ const testDB = async () => {
 const devDB = async () => {
   const db = new Low(new JSONFile('localdb.json'))
   await db.read()
-  // Migrate devDB data by updating seedData.js
-  db.data = seedData
-  await db.write()
+  if (!db.data) {
+    db.data = seedData
+    await db.write()
+  }
   return db
 }
 
@@ -32,10 +33,10 @@ const prodDB = async () => {
     ),
   )
   await db.read()
-  // Migrate data by updating seedData.js Each prod deploy will overwrite the
-  // existing data in S3 with seedData.js
-  db.data = seedData
-  await db.write()
+  if (!db.data) {
+    db.data = seedData
+    await db.write()
+  }
   return db
 }
 

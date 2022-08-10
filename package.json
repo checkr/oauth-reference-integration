@@ -91,7 +91,8 @@
       "node"
     ],
     "moduleNameMapper": {
-      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$": "identity-obj-proxy"
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$": "identity-obj-proxy",
+      "#(.*)": "<rootDir>/node_modules/$1"
     }
   },
   "lint-staged": {
