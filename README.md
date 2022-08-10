@@ -58,7 +58,7 @@ sequenceDiagram
     oauth.js->>+App Database: Persist and encrypt OAuth Access token in App Database
     oauth.js->>+App Frontend: Redirect to App Frontend
 
-    Note right of App Frontend: Account is uncredentialed
+    Note right of App Frontend: Account is waiting credentialing
     Checkr->>+oauth.js: Send account.credentialed webhook
     oauth.js->>+App Database: Update Checkr account state
     Note right of App Frontend: Account is credentialed
