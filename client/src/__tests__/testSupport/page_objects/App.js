@@ -28,7 +28,7 @@ class AppPageObject {
     await waitFor(() => {
       expect(
         this.screen.getByText(
-          'Your Checkr account is waiting to be credentialed for use',
+          'Your Checkr account is waiting to be credentialed',
         ),
       ).toBeInTheDocument()
     })
