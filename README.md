@@ -17,7 +17,7 @@ use-cases.
 
 <br />
 
-![Demo](docs/images/demo.gif)
+![Demo](docs/images/demo-v1.gif)
 
 <br />
 
