@@ -26,7 +26,7 @@ use-cases.
 - [Use case: Connecting customers](#use-case-connecting-customers)
 - [Use case: Using Embeds to order background checks](#use-case-using-embeds-to-order-background-checks)
 - [Live Sandbox](#live-sandbox)
-- [Resources](#resources)
+- [Technical Documentation](#technical-documentation)
 - [Running it locally](#running-it-locally)
 - [Got feedback?](#got-feedback)
 
@@ -97,7 +97,7 @@ Checkr account.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-## Resources
+## Technical Documentation
 
 - [API docs](https://docs.checkr.com)
 - [Partner Guide](https://docs.checkr.com/partners)
