@@ -37,6 +37,11 @@ your product. It gives your product the ability to make API calls on behalf of
 your customers. This described in more detail in our
 [partner guide](https://docs.checkr.com/partners/#section/Getting-Started/Connect-your-customers-to-Checkr).
 
+**Checklist**
+* [x] Signing up for a new Checkr account, or connecting an existing account.
+* [x] Waiting for account credentialing.
+* [x] Disconnecting a customer account from a partner. 
+
 #### Application components
 
 | Component                                                                                                                                  | Responsibility                      | Code walkthrough                                                                                                        |
@@ -78,6 +83,9 @@ sequenceDiagram
 Embeds provide Javascript and React components to quickly build an experience to
 order background checks and view results. Read more about it
 [here](https://docs.checkr.com/embeds/).
+
+**Checklist**
+* [x] Acquiring session tokens from Checkr to authenticate embeds.
 
 #### Application components
 
