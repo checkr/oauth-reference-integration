@@ -2,23 +2,23 @@
   "candidates": [
     {
       "id": "efb0d238-a455-41c6-b923-e0cc4f5761e7",
-      "email": "margesimpson@example.com",
+      "email": "devextest+margie@checkr.io",
       "name": "Marge Simpson",
-      "notes": "foobar",
-      "phone": "1111111111",
+      "notes": "She was referred by John Smith",
+      "phone": "415-234-9830",
       "step": "Interviewing",
-      "createdAt": "2022-06-02 18:16:33.512 +00:00",
-      "updatedAt": "2022-06-02 18:16:33.512 +00:00"
+      "createdAt": "2022-01-10T05:39:52.507Z",
+      "updatedAt": "2022-02-10T05:39:52.507Z"
     },
     {
       "id": "c44c8c7b-b07f-4a03-89ef-34396af15820",
-      "email": "homersimpson@example.com",
+      "email": "devextest+homer@checkr.io",
       "name": "Homer Simpson",
-      "notes": "foobar",
-      "phone": "2222222222",
+      "notes": "Homer works for a competitor",
+      "phone": "650-304-1351",
       "step": "Pass",
-      "createdAt": "2022-06-02 18:17:05.127 +00:00",
-      "updatedAt": "2022-06-02 18:17:05.127 +00:00"
+      "createdAt": "2022-04-10T05:39:52.507Z",
+      "updatedAt": "2022-05-10T05:39:52.507Z"
     }
   ]
 }
