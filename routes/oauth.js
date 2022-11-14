@@ -297,8 +297,8 @@ oauthRouter.post('/api/checkr/webhooks', async (req, res) => {
 // Deauthorize an access token
 // ---------------
 
-// <mark>All Checkr integrations are required to allow their user to
-// deauthorize their OAuth access token.</mark> This would disable your
+// <mark>Checkr integrations are highly encouraged to support
+// deauthorizing an user's OAuth access token.</mark> This would disable your
 // integration from ordering background checks on the user's behalf. This function
 // covers:
 oauthRouter.post('/api/checkr/deauthorize', async (req, res) => {
