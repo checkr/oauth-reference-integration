@@ -1,0 +1,2 @@
+microservice:
+  nameOverride: oauth-reference-integration

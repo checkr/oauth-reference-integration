@@ -1,0 +1,19 @@
+include:
+  - project: 'infrastructure/developer-productivity/pipeline-template-definitions'
+    file: 'build.yml'
+  - project: 'infrastructure/developer-productivity/pipeline-template-definitions'
+    file: 'deploy.yml'
+
+stages:
+  - build
+  - deploy_production
+
+build_image:
+  extends: .build_image
+
+deploy_production:
+  before_script:
+    - export
+    - sh bin/generate_chart.sh
+  extends: .deploy_production
+  when: on_success
