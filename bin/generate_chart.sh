@@ -41,6 +41,3 @@ printf "      ports:\n" >> .gitops/helm/oauth-reference-integration/production.y
 printf "        - port: 80\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "          targetPort: 5000\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "      selector: web\n" >> .gitops/helm/oauth-reference-integration/production.yaml
-
-echo "production"
-cat .gitops/helm/oauth-reference-integration/production.yaml
