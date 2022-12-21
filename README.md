@@ -46,8 +46,8 @@ your customers. This described in more detail in our
 
 | Component                                                                                                                                  | Responsibility                      | Code walkthrough                                                                                                        |
 | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/oauth.html)                                    |
-| [CheckrConnectLink.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/client/src/components/account/CheckrConnectLink.html) |
+| [oauth.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/oauth.js)                                                | Handles OAuth and Webhooks          | [walkthrough](https://checkr-oauth-integration.checkr.com/docs/routes/oauth.html)                                    |
+| [CheckrConnectLink.js](https://github.com/checkr/oauth-reference-integration/blob/main/client/src/components/account/CheckrConnectLink.js) | Link to connect account with Checkr | [walkthrough](https://checkr-oauth-integration.checkr.com/docs/client/src/components/account/CheckrConnectLink.html) |
 
 ```mermaid
 sequenceDiagram
@@ -91,12 +91,12 @@ order background checks and view results. Read more about it
 
 | Component                                                                                                                   | Responsibility                                 | Code walkthrough                                                                                     | Diagram                                                                |
 | --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [embeds-session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.herokuapp.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/#section/Getting-Started/Add-authentication) |
+| [embeds-session-tokens.js](https://github.com/checkr/oauth-reference-integration/blob/main/routes/embeds-session-tokens.js) | Handles requesting a Session token from Checkr | [walkthrough](https://checkr-oauth-integration.checkr.com/docs/routes/embeds-session-tokens.html) | [diagram](https://docs.checkr.com/embeds/#section/Getting-Started/Add-authentication) |
 
 ## Live sandbox
 
 An instance of this application is hosted at
-[checkr-oauth-integration.herokuapp.com](https://checkr-oauth-integration.herokuapp.com).
+[checkr-oauth-integration.checkr.com](https://checkr-oauth-integration.checkr.com).
 It is connected to a demo staging Checkr account which does not run real
 background checks.
 
