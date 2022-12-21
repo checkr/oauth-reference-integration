@@ -16,6 +16,7 @@ printf "  nameOverride: oauth-reference-integration\n" >> .gitops/helm/oauth-ref
 printf "  podDefaults:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "    env:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "      production:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
+printf "        NODE_ENV: production\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "        CHECKR_API_URL: ${CHECKR_API_URL}\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "        CHECKR_OAUTH_CLIENT_SECRET: ${CHECKR_OAUTH_CLIENT_SECRET}\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "        ENCRYPTION_SECRET_KEY: ${ENCRYPTION_SECRET_KEY}\n" >> .gitops/helm/oauth-reference-integration/production.yaml
