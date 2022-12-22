@@ -27,7 +27,7 @@ export default function CheckrConnectLink({customerAccountID}) {
   // Replace the customerAccountID with your account-level identifier
   // </details>
   const checkrSignupFlowHref = customerAccountID => {
-    const signupFlowLink = `${process.env.REACT_APP_CHECKR_PARTNER_URL}/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID}/signup`
+    const signupFlowLink = `${process.env.REACT_APP_CHECKR_PARTNER_URL || 'https://partners.checkrhq-staging.net'}/authorize/${process.env.REACT_APP_CHECKR_OAUTH_CLIENT_ID || 'e9ba3ef42210976905cd933f'}/signup`
     const state = customerAccountID
 
     const url = new URL(signupFlowLink)
