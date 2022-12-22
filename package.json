@@ -27,7 +27,6 @@
     "lint:style:fix": "stylelint --fix \"**/*.{css,scss}\""
   },
   "dependencies": {
-    "aws-sdk": "^2.1153.0",
     "chalk": "^5.0.1",
     "concurrently": "^7.3.0",
     "dotenv": "^16.0.1",
