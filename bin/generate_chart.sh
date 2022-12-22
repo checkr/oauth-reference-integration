@@ -27,7 +27,7 @@ printf "        S3_ACCESS_KEY_SECRET: ${S3_ACCESS_KEY_SECRET}\n" >> .gitops/helm
 printf "        S3_BUCKET: ${S3_BUCKET}\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "  deployments:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "    web:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
-printf "      command: ['env', 'node', 'server.js']\n" >> .gitops/helm/oauth-reference-integration/production.yaml
+printf "      command: ['node', 'server.js']\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "      replicaCount: $REPLICA_COUNT\n\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "  ingresses:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
 printf "    web:\n" >> .gitops/helm/oauth-reference-integration/production.yaml
