@@ -10,7 +10,7 @@ const testDB = async () => {
   return db
 }
 
-const devDB = async () => {
+const fileDB = async () => {
   const db = new Low(new JSONFile('localdb.json'))
   await db.read()
   if (!db.data) {
@@ -22,7 +22,7 @@ const devDB = async () => {
 
 const database = async () => {
   if (process.env.NODE_ENV === 'test') return await testDB()
-  return await devDB()
+  return await fileDB()
 }
 
 export default database
