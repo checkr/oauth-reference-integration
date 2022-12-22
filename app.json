@@ -29,18 +29,6 @@
       "description": "Encryption key to be used for storing secrets",
       "required": true,
       "value": "65520b062cff37a7b7632d0da163025dc39b17497bb16de6c42c3820da88c825"
-    },
-    "S3_ACCESS_KEY_ID": {
-      "description": "S3 Access Key ID for data storage",
-      "required": true
-    },
-    "S3_ACCESS_KEY_SECRET": {
-      "description": "S3 Access Key Secret for data storage",
-      "required": true
-    },
-    "S3_BUCKET": {
-      "description": "S3 bucket for data storage",
-      "required": true
     }
   },
   "keywords": ["node", "express", "static"],
