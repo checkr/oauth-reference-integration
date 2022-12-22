@@ -2,6 +2,10 @@ FROM node:16.19.0
 
 WORKDIR /usr/src/app
 
+ARG NODE_ENV=production
+ARG REACT_APP_CHECKR_OAUTH_CLIENT_ID=${REACT_APP_CHECKR_OAUTH_CLIENT_ID}
+ARG REACT_APP_CHECKR_PARTNER_URL=${REACT_APP_CHECKR_PARTNER_URL}
+
 COPY . .
 RUN yarn install --frozen-lockfile
 RUN yarn heroku-postbuild
