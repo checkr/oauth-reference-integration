@@ -17,7 +17,7 @@ accountsRouter.get('/api/accounts', async (_, res) => {
   // should be created when the user logs in.
   accounts[0]['userJWT'] = jwt.sign(
     {
-      sub: 'ce04e0a2-ecec-11ec-b7ed-f33adcba9538',
+      sub: '79a3ead9-2768-477f-8eca-724890dcf8d6',
       name: 'Our Favorite Customer',
       authorizations: {
         roles: ['user'],
