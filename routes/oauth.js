@@ -136,7 +136,7 @@ oauthRouter.get('/api/checkr/oauth', async (req, res) => {
   if (process.env.NODE_ENV === 'production') {
     res.status(200).redirect('/')
   } else {
-    res.status(200).redirect('http://localhost:3000/')
+    res.status(200).redirect('https://cleancore.ngrok.io')
   }
 })
 
