@@ -6,14 +6,14 @@ include:
 
 stages:
   - build
-  - deploy_production
+  - deploy_sandbox
 
 build_image:
   extends: .build_image
 
-deploy_production:
+deploy_sandbox_us:
   before_script:
     - export
     - sh bin/generate_chart.sh
-  extends: .deploy_production
+  extends: .deploy_sandbox_us
   when: on_success
