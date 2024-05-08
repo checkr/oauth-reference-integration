@@ -13,6 +13,17 @@ printf "  alias: $CHART_ALIAS\n" >> .gitops/helm/oauth-reference-integration/Cha
 printf "microservice:\n" > .gitops/helm/oauth-reference-integration/sandbox_us.yaml
 printf "  environment: sandbox\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
 printf "  nameOverride: oauth-reference-integration\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "  deploymentDefaults:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "    containerSecurityContext:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "      allowPrivilegeEscalation: false\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "      capabilities:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "        drop:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "          - ALL\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "    securityContext:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "      runAsUser: 1001\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "      runAsGroup: 1001\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "      fsGroup: 1001\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
+printf "      runAsNonRoot: true\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
 printf "  podDefaults:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
 printf "    env:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
 printf "      sandbox:\n" >> .gitops/helm/oauth-reference-integration/sandbox_us.yaml
