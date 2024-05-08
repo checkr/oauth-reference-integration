@@ -1,7 +1,7 @@
 const seedData = {
   accounts: [
     {
-      id: 'ce04e0a2-ecec-11ec-b7ed-f33adcba9538',
+      id: '79a3ead9-2768-477f-8eca-724890dcf8d6',
       name: 'Our Favorite Customer',
       createdAt: '2022-06-23T23:51:24.077Z',
       updatedAt: '2022-06-23T23:51:24.077Z',
